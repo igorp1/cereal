@@ -15,6 +15,7 @@ export class AboutComponent implements OnInit {
   public aboutText : Array<any>;
 
   ngOnInit() {
+    this.auth.initializeProfile(this.profile);
     this.loadAboutText();
   }
 

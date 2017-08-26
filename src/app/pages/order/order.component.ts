@@ -13,15 +13,7 @@ export class OrderComponent implements OnInit {
   public profile :any;
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      if(localStorage.getItem('access_token')){
-        this.auth.getProfile((err, profile) => {
-          this.profile = profile;
-        });
-      }
-    }
+    this.auth.initializeProfile(this.profile);
   }
 
 }
