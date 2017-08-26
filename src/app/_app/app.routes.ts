@@ -1,0 +1,29 @@
+import { Routes, CanActivate } from '@angular/router';
+
+import { HomeComponent } from '../pages/home/home.component'; 
+import { AdminComponent } from '../pages/admin/admin.component';
+import { ProfileComponent } from '../pages/profile/profile.component'; 
+import { AboutComponent } from '../pages/about/about.component'; 
+import { CerealComponent } from '../pages/cereal/cereal.component'; 
+import { MilkComponent } from '../pages/milk/milk.component'; 
+import { ToppingsComponent } from '../pages/toppings/toppings.component'; 
+import { ReviewComponent } from '../pages/review/review.component'; 
+import { OrderComponent } from '../pages/order/order.component'; 
+
+import { AuthGuardService as AuthGuard } from '../services/auth/auth-guard.service';
+import { ScopeGuardService as ScopeGuard } from '../services/auth/scope-guard.service';
+
+export const ROUTES: Routes = [
+  { path: '',               component: HomeComponent },
+  { path: 'about',          component: AboutComponent },
+  { path: 'order/cereal',   component: CerealComponent },
+  { path: 'order/milk',     component: MilkComponent },
+  { path: 'order/toppings',     component: ToppingsComponent },
+  { path: 'order/toppings', component: ReviewComponent },
+  { path: 'order/review',   component: OrderComponent },
+  { path: 'profile',        component: ProfileComponent, canActivate: [AuthGuard] },  
+  { path: 'admin',          component: AdminComponent, canActivate: [AuthGuard] },
+  // { path: 'admin',          component: AdminComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['admin']} }, 
+  { path: '**', redirectTo: '' }
+];
+ 

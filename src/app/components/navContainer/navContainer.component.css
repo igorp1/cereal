@@ -1,0 +1,75 @@
+.fixed-tab-open{
+    position: fixed;
+    bottom: -50px;
+    left: 10px;
+}
+
+.fixed-tab-open button{
+    background-color: white;
+}
+
+md-sidenav-container {
+  top: 58px;
+  width: 100vw;
+  position: fixed;
+  overflow-y: scroll;
+  height: calc(100vh - 58px);
+  background-color: #efefef;
+
+}
+
+.example-sidenav-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+md-sidenav {
+  padding: 20px;
+  min-width: 300px;
+}
+
+md-list-item{
+  margin-bottom: .3em;
+}
+
+.active-link{
+    color: black;
+}
+
+.main-outlet{
+  margin-bottom:30em;
+}
+
+.open-nav-button{
+  position:fixed;
+  left:1em;
+  bottom:1em;
+}
+
+.content-container{
+  position:absolute; 
+  top:0; 
+  left:0;
+  padding:1em;
+  width:calc(100% - 2em);
+}
+
+
+
+
+
+
+
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .main-outlet{
+      width: 100vw !important;
+      left: 0 !important;
+    }
+}

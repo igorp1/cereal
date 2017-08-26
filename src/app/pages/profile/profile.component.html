@@ -1,0 +1,8 @@
+<md-card>
+  
+  <img [src]="profile?.picture" *ngIf="profile" class="user-image elevation-1">
+  <h4>{{ profile?.name }}</h4>
+
+  <pre class="elevation-2"> {{ profile | json }} </pre>
+
+</md-card>

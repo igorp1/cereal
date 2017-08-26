@@ -1,0 +1,25 @@
+<md-card class="main-card">  
+
+  <h3>Pick cereal</h3>
+
+  <div class="main-list">
+      <ul>
+        <ng-container *ngFor="let x of cerealList">
+          <store-li 
+            [name]="x.fields.name" 
+            [image]="x.fields.image_link" 
+            [color]="x.fields.color" 
+            [count]="x.fields.count"
+            [unit]="{'singular':'bowl','plural':'bowls'}"
+            (incrementCount)="addToCart($event, x)"></store-li>
+        </ng-container>
+      </ul>
+  </div>
+
+  <div style="height:2em; margin-top:1em; ">
+      <button md-raised-button [style.backgroundColor]="'#9FEBED'" style="float:right;" (click)="goToMilk()">
+          Pick Milk <md-icon>arrow_forward</md-icon>
+      </button> 
+  </div>
+
+</md-card>

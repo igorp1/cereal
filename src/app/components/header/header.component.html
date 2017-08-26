@@ -1,0 +1,43 @@
+<!-- HEADER TABLE -->
+<table class="app-header">
+  <tr [style.borderBottomColor]="colorFromWeekday()">
+
+    <!-- TITLE -->
+    <td>
+        <h1 [style.fontFamily]="Title.font">{{Title.label}}</h1>
+    </td>
+
+    <!-- RIGHT ACTIONABLE ICON -->
+    <td> 
+      <!-- LOG IN -->
+      <button type="button" md-icon-button *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
+          <i class="material-icons">face</i>
+      </button>
+
+      <!-- PROFILE MENU -->
+      <div style="position:fixed; top:10px; right: 10px" *ngIf="auth.isAuthenticated()">
+        <md-menu #profileMenu="mdMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
+          <button md-menu-item  routerLink="profile"> 
+            <img [src]="User?.picture" class="avatar" alt="avatar" height="40px" style="vertical-align:middle">
+            <span>{{User?.name}}</span>
+          </button>
+          <button md-menu-item routerLink="about">
+            <md-icon>developer_board</md-icon>
+            <span>about</span>
+          </button>
+          <button md-menu-item (click)="auth.logout()">
+              <md-icon>directions_run</md-icon>
+              <span>logout</span>
+          </button>
+        </md-menu>
+        <button md-icon-button *ngIf="auth.isAuthenticated()" [mdMenuTriggerFor]="profileMenu">
+          <img [src]="User?.picture" class="avatar" alt="avatar" height="40px" *ngIf="!this.loadingUser">
+          <img src="https://camo.githubusercontent.com/ce652d1e71659b7b61187377a4c337558ed9296b/687474703a2f2f692e696d6775722e636f6d2f637873543772532e676966" style="border-radius:100%" alt="loading" width="40px" height="40px" *ngIf="this.loadingUser">
+        </button>
+      </div>
+      <!-- eof PROFILE MENU -->
+    </td>
+  </tr>
+</table>
+<!-- eof HEADER TABLE -->
+

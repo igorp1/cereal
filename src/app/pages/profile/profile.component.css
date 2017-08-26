@@ -1,0 +1,17 @@
+.user-image{
+  margin: 0;    
+  height: 2em;
+  width: auto;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+pre{
+  overflow: scroll;
+  padding: .3em;
+}
+
+h4{
+  display: inline-block;
+}

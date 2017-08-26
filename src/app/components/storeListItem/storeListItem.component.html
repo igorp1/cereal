@@ -1,0 +1,16 @@
+<li class="elevation-1" [style.borderLeftColor]="color">
+  <div class="pure-g">
+      <div class="pure-u-1-5 pure-u-lg-3-12">
+        <img class="list-item-img" [src]="image">
+      </div>
+      <div class="pure-u-3-5 pure-u-lg-6-12"> 
+        <h3 class="list-item-title">{{name}}</h3>
+        <p class="unit-count">{{count ? count + " " + (count == 1 ? unit.singular : unit.plural ) : ""}}</p>
+      </div>
+      <div class="pure-u-1-5 pure-u-lg-3-12">
+        <button md-mini-fab class="list-item-button" (click)="addingToCart()" [style.backgroundColor]="color">
+          <md-icon>add_shopping_cart</md-icon>
+        </button>
+      </div>
+  </div> 
+</li>
