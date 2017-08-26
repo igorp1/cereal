@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
+import { CerealAPIService } from '../../services/api/CerealAPI.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'toppings',
@@ -8,20 +10,37 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class ToppingsComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, 
+    private _cerealAPI: CerealAPIService,
+    private router : Router) { }
 
   public profile :any;
+  public toppingList : Array<any>;
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      if(localStorage.getItem('access_token')){
-        this.auth.getProfile((err, profile) => {
-          this.profile = profile;
-        });
-      }
-    }
+    this.auth.initializeProfile(this.profile);
+    this.loadMilk();
+  }
+
+  loadMilk(){
+    this._cerealAPI.getTopping().subscribe(data => this.toppingList = data);  
+  }
+
+
+  addToCart($event, milk){
+    console.log(milk.fields.name + `(${milk.count} => ${$event})`)
+    milk.count = $event;
+  }
+
+
+  goToReviewOrder(){
+    // store picked toppings
+
+    // request order ID
+
+    // go to milk page
+    this.router.navigateByUrl('/order/review');
+
   }
 
 }

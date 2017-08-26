@@ -12,16 +12,31 @@ export class AboutComponent implements OnInit {
 
   public profile :any;
 
+  public aboutText : Array<any>;
+
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      if(localStorage.getItem('access_token')){
-        this.auth.getProfile((err, profile) => {
-          this.profile = profile;
-        });
+    this.loadAboutText();
+  }
+
+  loadAboutText(){
+    this.aboutText = [
+      {
+        'title':'What do we do?',
+        'text': 'blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah '
+      },
+      {
+        'title':'How does it work?',
+        'text': 'blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah '
+      },
+      {
+        'title':'How much is it?',
+        'text': 'blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah '
+      },
+      {
+        'title':'Where do I start?',
+        'text': 'blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah '
       }
-    }
+    ]
   }
 
 }

@@ -1,26 +1,26 @@
 <md-card class="main-card">  
     
-      <h3>Pick milk</h3>
-    
-      <div class="main-list">
-          <ul>
-            <ng-container *ngFor="let x of milkList">
-              <store-li 
-                [name]="x.fields.name" 
-                [image]="x.fields.image_link" 
-                [color]="x.fields.color" 
-                [count]="x.fields.count"
-                [unit]="{'singular':'bottle','plural':'bottles'}"
-                (incrementCount)="addToCart($event, x)"></store-li>
-            </ng-container>
-          </ul>
-      </div>
-    
-      <div style="height:2em; margin-top:1em; ">
-          <button md-raised-button [style.backgroundColor]="'#DE791B'" style="float:right;" (click)="goToToppings()">
-              Pick Toppings <md-icon>arrow_forward</md-icon>
-          </button> 
-      </div>
-    
-    </md-card>
+    <h3>Pick milk</h3>
+
+    <div class="main-list">
+        <ul>
+        <ng-container *ngFor="let x of milkList">
+            <store-li 
+            [name]="x.fields.name" 
+            [image]="x.fields.image_link" 
+            [color]="x.fields.color" 
+            [count]="x.fields.count"
+            [unit]="{'singular':'bottle','plural':'bottles'}"
+            (incrementCount)="addToCart($event, x)"></store-li>
+        </ng-container>
+        </ul>
+    </div>
+
+    <div style="height:2em; margin-top:1em; ">
+        <button md-raised-button [style.backgroundColor]="'#DE791B'" style="float:right;" (click)="goToToppings()">
+            Pick Toppings <md-icon>arrow_forward</md-icon>
+        </button> 
+    </div>
+
+</md-card>
     
