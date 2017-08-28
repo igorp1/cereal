@@ -9,7 +9,7 @@
             [name]="x.fields.name" 
             [image]="x.fields.image_link" 
             [color]="x.fields.color" 
-            [count]="x.fields.count"
+            [count]="x.count"
             [unit]="{'singular':'bowl','plural':'bowls'}"
             (incrementCount)="addToCart($event, x)"></store-li>
         </ng-container>

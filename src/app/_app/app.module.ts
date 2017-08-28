@@ -40,7 +40,8 @@ import { OrderComponent } from '../pages/order/order.component';
 // import services
 import { AuthGuardService }       from '../services/auth/auth-guard.service';
 import { ScopeGuardService }      from '../services/auth/scope-guard.service';
-import { CerealAPIService }       from '../services/api/CerealAPI.service';      
+import { CerealAPIService }       from '../services/CerealAPI.service';      
+import { CartService }            from '../services/Cart.service';
 
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
@@ -84,6 +85,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuardService,
     ScopeGuardService,
     CerealAPIService,
+    CartService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

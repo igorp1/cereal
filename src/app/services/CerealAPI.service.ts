@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { APP_CONFIG } from '../../constants/AppConfig'
+import { APP_CONFIG } from '../constants/AppConfig'
 
 @Injectable()
 export class CerealAPIService {
@@ -40,7 +40,6 @@ export class CerealAPIService {
         return this.http.get(this.API_BASE + "topping/get/" + id + "/");
     }
 
-
     addToCart(item :  any){
 
         // for now, this is gonna be empty, 
@@ -48,7 +47,6 @@ export class CerealAPIService {
         // then come back to add functionality back here
 
     }
-
 
 
 }
