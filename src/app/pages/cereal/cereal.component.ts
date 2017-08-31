@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
-import { CerealAPIService } from '../../services/CerealAPI.service';
 import {Router} from '@angular/router';
-import { CartService } from '../../services/Cart.service';
+
+import { AuthService }        from '../../services/auth/auth.service';
+import { CerealAPIService }   from '../../services/CerealAPI.service';
+import { CartService }        from '../../services/Cart.service';
+import { ContextService }     from '../../services/Context.service';
 
 @Component({
   selector: 'cereal',
@@ -14,6 +16,7 @@ export class CerealComponent implements OnInit {
   constructor(public auth: AuthService, 
               private _cerealAPI : CerealAPIService,
               private _cart : CartService,
+              private _context: ContextService,
               private router : Router) { }
 
   public profile :any;
@@ -21,6 +24,7 @@ export class CerealComponent implements OnInit {
 
   ngOnInit() {
     this.auth.initializeProfile(this.profile);
+    this._context.visiting('order/cereal');
     this.loadCereal();
   }
 
@@ -31,17 +35,13 @@ export class CerealComponent implements OnInit {
   }
 
   addToCart($event, cereal){
-    //console.log(cereal.fields.name + `(${cereal.count} => ${$event})`)
     cereal.count = $event;
     this._cart.addToCart(cereal);
   }
 
   goToMilk(){
-    // store picked cereal
-
     // go to milk page
     this.router.navigateByUrl('/order/milk');
-
   }
 
 }

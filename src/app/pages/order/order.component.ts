@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { CartService } from '../../services/Cart.service';
+import { ContextService } from '../../services/Context.service';
 
 import { APP_CONFIG } from '../../constants/AppConfig';
 
@@ -13,7 +15,9 @@ import { APP_CONFIG } from '../../constants/AppConfig';
 export class OrderComponent implements OnInit {
 
   constructor(public auth: AuthService,
-              private _cart: CartService) { }
+              private _cart: CartService,
+              private _context: ContextService,
+              private router : Router) { }
 
   public profile :any;
   
@@ -23,6 +27,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.auth.initializeProfile(this.profile);
+    this._context.visiting('order/review')
   }
 
   minusOneOnCart(item){
@@ -42,6 +47,16 @@ export class OrderComponent implements OnInit {
   plusOneOnCart(item){
     item.count++;
     this._cart.persist();
+  }
+
+  readyToPay(){
+    // the order is only saved on the application and local storage
+    if (this.auth.isAuthenticated()){
+      this.router.navigateByUrl('order/payment');
+    }
+    else{
+      this.auth.login();
+    }
   }
 
 }

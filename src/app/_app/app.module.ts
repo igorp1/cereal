@@ -36,12 +36,15 @@ import { MilkComponent } from '../pages/milk/milk.component';
 import { ToppingsComponent } from '../pages/toppings/toppings.component'; 
 import { ReviewComponent } from '../pages/review/review.component'; 
 import { OrderComponent } from '../pages/order/order.component'; 
+import { PaymentComponent } from '../pages/payment/payment.component'; 
+import { CallbackComponent } from '../pages/callback/callback.component'; 
 
 // import services
 import { AuthGuardService }       from '../services/auth/auth-guard.service';
 import { ScopeGuardService }      from '../services/auth/scope-guard.service';
 import { CerealAPIService }       from '../services/CerealAPI.service';      
-import { CartService }            from '../services/Cart.service';
+import { CartService }            from '../services/Cart.service';     
+import { ContextService }            from '../services/Context.service';
 
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
@@ -67,6 +70,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ToppingsComponent,
     ReviewComponent,
     OrderComponent,
+    PaymentComponent,
+    CallbackComponent,
     HeaderComponent,
     NavContainerComponent,
     StoreListItemComponent
@@ -86,6 +91,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ScopeGuardService,
     CerealAPIService,
     CartService,
+    ContextService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,

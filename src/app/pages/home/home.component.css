@@ -26,7 +26,7 @@
 }
 
 .cereal-gifs-container img:hover{
-    height:150px;
+    height:140px;
 }
 
-button{margin: .2em;}
+button{margin: .2em; border: 3px solid black;}

@@ -24,6 +24,13 @@ const Tabs : Array<ITab> = [
         security: { Type:TabTypeEnum.open, Scopes:undefined } 
     },
     { 
+        id:'cart',
+        label:'Cart',
+        link:'order/review',
+        icon:'local_grocery_store',  // icon:'pallete'
+        security: { Type:TabTypeEnum.open, Scopes:undefined } 
+    },
+    { 
         id:'admin',
         label:'Admin Area',
         link:'/admin',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
+import { ContextService } from '../../services/Context.service';
 
 @Component({
   selector: 'about',
@@ -8,7 +9,8 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService,
+              private _context: ContextService) { }
 
   public profile :any;
 

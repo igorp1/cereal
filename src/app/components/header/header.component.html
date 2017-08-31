@@ -4,7 +4,7 @@
 
     <!-- TITLE -->
     <td>
-        <h1 [style.fontFamily]="Title.font" [style.color]="colorFromWeekday()">{{Title.label}}</h1>
+        <h1 style="outline:none;" [style.fontFamily]="Title.font" [style.color]="colorFromWeekday()" routerLink="">{{Title.label}}</h1>
     </td>
 
     <!-- RIGHT ACTIONABLE ICON -->
@@ -21,10 +21,10 @@
             <img [src]="User?.picture" class="avatar" alt="avatar" height="40px" style="vertical-align:middle">
             <span>{{User?.name}}</span>
           </button>
-          <button md-menu-item routerLink="about">
+          <!-- <button md-menu-item routerLink="about">
             <md-icon>developer_board</md-icon>
             <span>about</span>
-          </button>
+          </button> -->
           <button md-menu-item (click)="auth.logout()">
               <md-icon>directions_run</md-icon>
               <span>logout</span>

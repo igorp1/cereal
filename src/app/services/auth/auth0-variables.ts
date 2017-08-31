@@ -6,8 +6,9 @@ interface AuthConfig {
 }
 
 export const AUTH_CONFIG: AuthConfig = {
-  clientID: 'ZvWmQqZBqqatQ7v4SHBD56OezFISC3Xy',
-  domain: 'idp-dev.auth0.com',
+  clientID: '74CZKbLb9m7QnhYPdjjpL3CTCQKu35Cj',
+  domain: 'cerealstop.auth0.com',
   callbackURL: 'http://localhost:4200/callback',
-  apiUrl: 'http://flux-api-idpcode.c9users.io/'
+  apiUrl: 'https://cerealstop.api.com/'
 };
+

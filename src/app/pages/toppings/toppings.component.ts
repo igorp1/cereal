@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { CerealAPIService } from '../../services/CerealAPI.service';
 import {Router} from '@angular/router';
 import { CartService } from '../../services/Cart.service';
+import { ContextService } from '../../services/Context.service';
 
 @Component({
   selector: 'toppings',
@@ -14,6 +15,7 @@ export class ToppingsComponent implements OnInit {
   constructor(public auth: AuthService, 
     private _cerealAPI: CerealAPIService,
     private _cart : CartService,
+    private _context : ContextService,
     private router : Router) { }
 
   public profile :any;
@@ -21,6 +23,7 @@ export class ToppingsComponent implements OnInit {
 
   ngOnInit() {
     this.auth.initializeProfile(this.profile);
+    this._context.visiting('order/toppings')
     this.loadToppings();
   }
 
@@ -31,19 +34,13 @@ export class ToppingsComponent implements OnInit {
   }
 
   addToCart($event, topping){
-    //console.log(topping.fields.name + `(${topping.count} => ${$event})`)
     topping.count = $event; 
     this._cart.addToCart(topping);
   }
 
   goToReviewOrder(){
-    // store picked toppings
-
-    // request order ID
-
     // go to milk page
     this.router.navigateByUrl('/order/review');
-
   }
 
 }

@@ -7,7 +7,7 @@
 </div>
 
 <div>
-  <div class="pure-g" style="margin-top:160px; margin-bottom: 70px;" >
+  <div class="pure-g" style="margin-top:145px; margin-bottom: 60px;" >
     <md-card>
       <div class="pure-u-1 pure-u-md-1-2">      
         <img [src]="PageConfig.logo" width="60%" style="margin-left: auto;margin-right: auto;display: block;">
@@ -18,7 +18,7 @@
           {{PageConfig.blurb}}
         </p>
 
-        <button md-raised-button *ngFor="let b of PageConfig.welcomeLinks" [style.backgroundColor]="b.color" routerLink="{{b.link}}">
+        <button md-raised-button *ngFor="let b of PageConfig.welcomeLinks" [style.borderColor]="b.color" routerLink="{{b.link}}">
           {{b.label}}
         </button> 
       </div> 

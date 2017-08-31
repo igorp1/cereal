@@ -142,6 +142,7 @@ export class CartService {
 
     public persist(){
         localStorage.setItem('CEREAL_CART', JSON.stringify(this.cartItems));
+
     }
 
     private loadFromStorage(){
