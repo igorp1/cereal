@@ -44,7 +44,7 @@ export class CartService {
 
     }
 
-    removeFromCart(item) {
+    public removeFromCart(item) {
         
         if(item.count == 0){
             throw new Error(`The item ${item.fields.name} has not reached a count of 0 but is going to be removed from the cart.`);
@@ -130,6 +130,19 @@ export class CartService {
         return items_array
     }
 
+    public calculateTotal(){
+        
+        let total = 0;
+        let DELIVERY = 3;
+
+        this.cartItems.forEach( ii => {
+            total += ii.fields.price * ii.count;
+        });
+
+        return total + DELIVERY;        
+
+    }
+
     private isInCart(new_item): boolean {
         let exists = false;
         this.cartItems.forEach(element => {
@@ -156,5 +169,6 @@ export class CartService {
             });
         } 
     }
+
 
 }

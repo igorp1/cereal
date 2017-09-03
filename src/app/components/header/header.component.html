@@ -18,7 +18,7 @@
       <div style="position:fixed; top:10px; right: 10px" *ngIf="auth.isAuthenticated()">
         <md-menu #profileMenu="mdMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
           <button md-menu-item  routerLink="profile"> 
-            <img [src]="User?.picture" class="avatar" alt="avatar" height="40px" style="vertical-align:middle">
+            <img [src]="User?.picture == null ? '' : User?.picture" class="avatar" alt="avatar" height="40px" style="vertical-align:middle">
             <span>{{User?.name}}</span>
           </button>
           <!-- <button md-menu-item routerLink="about">

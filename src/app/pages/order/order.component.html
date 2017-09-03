@@ -3,7 +3,9 @@
   <h3>Order</h3>
   <h4>{{prompt}}</h4>
 
-  <button md-button [style.color]="todayColor" routerLink="/order/cereal" >Cereal</button>
+  <button md-button [style.color]="todayColor" routerLink="/order/cereal" >
+    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Cereal
+  </button>
   <p class="no-items" *ngIf="_cart.getCerealStrings().length == 0">{{noItemText}}</p>
   <ul>
     <li *ngFor="let i of _cart.cereal" [style.borderColor]="todayColor">
@@ -16,7 +18,9 @@
     </li>
   </ul>
 
-  <button md-button [style.color]="todayColor" routerLink="/order/milk" >Milk</button>
+  <button md-button [style.color]="todayColor" routerLink="/order/milk" >
+    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Milk
+  </button>
   <p class="no-items" *ngIf="_cart.getMilkStrings().length == 0">{{noItemText}}</p>
   <ul>
     <li *ngFor="let i of _cart.milk" [style.borderColor]="todayColor">
@@ -29,7 +33,9 @@
     </li>
   </ul>
 
-  <button md-button [style.color]="todayColor" routerLink="/order/toppings" >Toppings</button>
+  <button md-button [style.color]="todayColor" routerLink="/order/toppings" >
+    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Toppings
+  </button>
   <p class="no-items" *ngIf="_cart.getToppingsStrings().length == 0">{{noItemText}}</p>
   <ul>
     <li *ngFor="let i of _cart.toppings" [style.borderColor]="todayColor">

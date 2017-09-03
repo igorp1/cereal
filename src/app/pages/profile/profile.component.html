@@ -1,8 +1,22 @@
-<md-card>
+<md-card class="main-card">
   
-  <img [src]="profile?.picture" *ngIf="profile" class="user-image elevation-1">
-  <h4>{{ profile?.name }}</h4>
+  <img [src]="_context.profile?.picture" *ngIf="_context.profile" class="user-image elevation-1">
+  <h4 class="username">{{ _context.profile?.name }}</h4>
 
-  <pre class="elevation-2"> {{ profile | json }} </pre>
+  <!-- helpful for debugging --> 
+  <pre class="elevation-2" *ngIf="false"> {{ profile | json }} </pre>
+
+  <h4>Past orders</h4>
+  <ul>
+    <li></li>
+  </ul>
+
+  <button md-raised-button (click)="address_picker_visible_toggle=true">new address</button>
+
+
+  
+
 
 </md-card>
+
+<address-picker *ngIf="address_picker_visible_toggle" (addressChosenEmitter)="getAddressFromComponent($event)"></address-picker>

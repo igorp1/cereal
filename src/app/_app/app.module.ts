@@ -1,6 +1,6 @@
 // @angular lib imports
 import { NgModule }                           from '@angular/core';
-import { FormsModule }                        from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule, Http, RequestOptions }   from '@angular/http';
 import { RouterModule }                       from '@angular/router';
 import { BrowserModule }                      from '@angular/platform-browser';
@@ -34,7 +34,6 @@ import { AboutComponent } from '../pages/about/about.component';
 import { CerealComponent } from '../pages/cereal/cereal.component'; 
 import { MilkComponent } from '../pages/milk/milk.component'; 
 import { ToppingsComponent } from '../pages/toppings/toppings.component'; 
-import { ReviewComponent } from '../pages/review/review.component'; 
 import { OrderComponent } from '../pages/order/order.component'; 
 import { PaymentComponent } from '../pages/payment/payment.component'; 
 import { CallbackComponent } from '../pages/callback/callback.component'; 
@@ -49,7 +48,11 @@ import { ContextService }            from '../services/Context.service';
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
 import { NavContainerComponent }  from '../components/navContainer/navContainer.component';
-import { StoreListItemComponent } from '../components/storeListItem/storeListItem.component'
+import { StoreListItemComponent } from '../components/storeListItem/storeListItem.component';
+import { AddressPickerComponent } from '../components/addressPicker/addressPicker.component';
+
+// third-party libs
+import { AgmCoreModule } from '@agm/core';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -68,15 +71,20 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     CerealComponent,
     MilkComponent,
     ToppingsComponent,
-    ReviewComponent,
     OrderComponent,
     PaymentComponent,
     CallbackComponent,
     HeaderComponent,
     NavContainerComponent,
-    StoreListItemComponent
+    StoreListItemComponent,
+    AddressPickerComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyAH3AKzb2Yk85CDiJQ3svmNEa1gS-JjVg4",
+      libraries: ["places"]
+    }),
+    ReactiveFormsModule,
     BrowserModule,
     MaterialModule,
     BrowserAnimationsModule,

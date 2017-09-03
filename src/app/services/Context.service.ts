@@ -4,6 +4,7 @@ import { APP_CONFIG } from '../constants/AppConfig'
 import { CerealAPIService } from './CerealAPI.service'
 import { CartService } from './Cart.service'
 
+import { AuthService } from './auth/auth.service';
 
 
 @Injectable()
@@ -11,15 +12,18 @@ export class ContextService {
 
     /***** CONTRUCTOR *****/
     constructor (
+        private  auth:      AuthService,
         private _cereal:    CerealAPIService,
         private _cart:      CartService      
     ) {  
-        this.loadStateFromLocalStorage()
+        this.loadStateFromLocalStorage();
+        this.loadUserProfile();
     }
 
     // public member variables 
     public lastPageVisited : String;
     public todaysColor : String = APP_CONFIG.WeekdayColor
+    public profile : any;
 
     // public API
     public visiting(page : String){
@@ -47,6 +51,16 @@ export class ContextService {
 
         localStorage.setItem('CEREAL_APP_CONTEXT', JSON.stringify(save_json));
 
+    }
+
+    private loadUserProfile(){
+        if (this.auth.userProfile) {
+        this.profile = this.auth.userProfile;
+        } else {
+        this.auth.getProfile((err, profile) => {
+            this.profile = profile;
+        });
+        }
     }
 
 }

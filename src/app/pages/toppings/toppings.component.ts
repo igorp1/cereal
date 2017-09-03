@@ -18,11 +18,9 @@ export class ToppingsComponent implements OnInit {
     private _context : ContextService,
     private router : Router) { }
 
-  public profile :any;
   public toppingList : Array<any>;
 
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this._context.visiting('order/toppings')
     this.loadToppings();
   }

@@ -18,18 +18,16 @@ export class MilkComponent implements OnInit {
     private _context : ContextService,
     private router : Router) { }
 
-  public profile :any;
   public milkList : Array<any>;
 
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this._context.visiting('order/milk');
     this.loadMilk();
   }
 
   loadMilk(){
     this._cerealAPI.getMilk().subscribe(data => {
-      this.milkList = this._cart.updateLoadedItems(data, 'cereal'); 
+      this.milkList = this._cart.updateLoadedItems(data, 'milk'); 
     });  
   }
 

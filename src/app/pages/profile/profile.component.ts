@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
 
+import { ContextService } from './../../services/Context.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -8,18 +10,16 @@ import { AuthService } from './../../services/auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
-  profile: any;
+  address_picker_visible_toggle: boolean;
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService,
+  public _context : ContextService) { }
 
-  ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
+  ngOnInit() { }
+
+  getAddressFromComponent($event){
+    this.address_picker_visible_toggle = false;
   }
+
 
 }

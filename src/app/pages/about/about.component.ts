@@ -12,12 +12,9 @@ export class AboutComponent implements OnInit {
   constructor(public auth: AuthService,
               private _context: ContextService) { }
 
-  public profile :any;
-
   public aboutText : Array<any>;
 
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this.loadAboutText();
   }
 

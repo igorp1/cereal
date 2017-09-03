@@ -16,15 +16,12 @@ export class CallbackComponent implements OnInit {
     private _context : ContextService 
   ) { }
 
-  public profile :any;
-
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this.decideRedirect();
   }
 
   decideRedirect() {
-    this.router.navigateByUrl(this._context.lastPageVisited.toString());
+    this.router.navigateByUrl(this._context.lastPageVisited ? this._context.lastPageVisited.toString() : "");
   }
 
 }

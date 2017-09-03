@@ -12,6 +12,7 @@ pre{
   padding: .3em;
 }
 
-h4{
+h4.username{
   display: inline-block;
+  margin: 0;
 }

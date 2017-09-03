@@ -95,7 +95,7 @@ export class AuthService {
     return scopes.every(scope => grantedScopes.includes(scope));
   }
 
-  public initializeProfile(profile: any){
+  public initializeProfile(profile){
     if (this.userProfile) 
     {
       profile = this.userProfile;
@@ -103,7 +103,7 @@ export class AuthService {
     else 
     {
       if(localStorage.getItem('access_token')){
-        this.getProfile((err, p) => { profile = p; });
+        this.getProfile((err, p) => { console.log('here!'); profile = p; });
       }
     }
   }

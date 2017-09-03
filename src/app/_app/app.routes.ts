@@ -7,7 +7,6 @@ import { AboutComponent } from '../pages/about/about.component';
 import { CerealComponent } from '../pages/cereal/cereal.component'; 
 import { MilkComponent } from '../pages/milk/milk.component'; 
 import { ToppingsComponent } from '../pages/toppings/toppings.component'; 
-import { ReviewComponent } from '../pages/review/review.component'; 
 import { OrderComponent } from '../pages/order/order.component'; 
 import { PaymentComponent } from '../pages/payment/payment.component'; 
 import { CallbackComponent } from '../pages/callback/callback.component'; 
@@ -26,7 +25,7 @@ export const ROUTES: Routes = [
   { path: 'order/review',   component: OrderComponent },
   { path: 'order/payment',  component: PaymentComponent, canActivate: [AuthGuard] },  
   { path: 'profile',        component: ProfileComponent, canActivate: [AuthGuard] },  
-  //{ path: 'admin',          component: AdminComponent, canActivate: [AuthGuard] },
+  // { path: 'admin',          component: AdminComponent, canActivate: [AuthGuard] },
   // { path: 'admin',          component: AdminComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['admin']} }, 
   { path: '**', redirectTo: '' }
 ];

@@ -1,0 +1,47 @@
+
+agm-map {
+    height: 12em;
+    width: calc(100vw - 2.8em);
+}
+
+div.map-container{
+    z-index: 999;
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(232, 232, 232, 0.98);
+    padding: 1.4em;
+}
+
+div.form-group{
+    margin-bottom: 2em;
+    width: calc(100vw - 3.8em);
+}
+
+div.map{
+    width: calc(100vw - 3.8em);
+}
+
+div.form-group input{
+    width: 100%;
+    padding: .5em;
+    border-radius: .3em;
+    outline: none;
+    border: none;
+}
+
+div.map-container h2{
+    width: calc(100vw - 2.8em);
+    font-weight: 400;
+    text-align: center;
+}
+
+div.control-buttons{
+    margin-top: 2em; 
+}
+
+
+
+

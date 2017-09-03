@@ -15,10 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(public auth: AuthService,
             private _context : ContextService) { }
 
-  public profile :any;
   ngOnInit() {
-
-    this.auth.initializeProfile(this.profile);
     this._context.visiting('');
     this.setupPageConfig(); 
   }

@@ -18,15 +18,12 @@ export class OrderComponent implements OnInit {
               private _cart: CartService,
               private _context: ContextService,
               private router : Router) { }
-
-  public profile :any;
   
   public prompt : string = "Please review your order below"; 
   public noItemText : string = "No items yet... click above to add something."
   public todayColor : string = APP_CONFIG.WeekdayColor; 
 
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this._context.visiting('order/review')
   }
 

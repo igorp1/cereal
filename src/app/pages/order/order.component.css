@@ -12,7 +12,7 @@ ul, li{
     margin: 0;
 }
 
-ul{ list-style: none;}
+ul{ list-style: none; margin-bottom: .5em;}
 
 li{
     height: 2.5em;

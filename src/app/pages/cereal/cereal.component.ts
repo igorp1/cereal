@@ -19,11 +19,9 @@ export class CerealComponent implements OnInit {
               private _context: ContextService,
               private router : Router) { }
 
-  public profile :any;
   public cerealList : Array<any>;
 
   ngOnInit() {
-    this.auth.initializeProfile(this.profile);
     this._context.visiting('order/cereal');
     this.loadCereal();
   }
