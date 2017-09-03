@@ -16,3 +16,40 @@ h4.username{
   display: inline-block;
   margin: 0;
 }
+
+ul.addr-list{
+  list-style: none;
+}
+
+ul.addr-list, li{
+  margin: 0;
+  padding: 0;
+}
+
+ul.addr-list li span{
+  display: block;
+  font-size: 0.8em;
+  color: #C1C1C1;
+}
+
+ul.addr-list li{
+  margin-bottom: 1em;
+}
+
+ul.addr-list div.close, ul.addr-list div.save {
+  float: right;
+  margin-right: -.5em;
+}
+
+ul.addr-list li input{
+  border: none;
+  border-bottom: 2px solid;
+  margin-bottom: .5em;
+  border-radius: .1em;
+  padding: .3em;
+  outline: none; 
+}
+
+ul.addr-list li input:hover, ul.addr-list li input:active{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}

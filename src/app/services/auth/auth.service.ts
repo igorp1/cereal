@@ -70,6 +70,9 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     localStorage.setItem('scopes', JSON.stringify(scopes));
+
+    // maybe, just maybe... throw a location.reload() here
+
   }
 
   public logout(): void {

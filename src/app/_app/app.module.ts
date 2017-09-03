@@ -2,6 +2,7 @@
 import { NgModule }                           from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpModule, Http, RequestOptions }   from '@angular/http';
+import { ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { RouterModule }                       from '@angular/router';
 import { BrowserModule }                      from '@angular/platform-browser';
 import { BrowserAnimationsModule }            from '@angular/platform-browser/animations';
@@ -14,6 +15,9 @@ import {  MaterialModule,
           MdInputModule,
           MdGridListModule
 } from '@angular/material';
+
+import { CommonModule }   from '@angular/common';
+import {  XSRFStrategy, CookieXSRFStrategy } from '@angular/http';
 
 // Import gesture libs
 import 'hammerjs';
@@ -43,7 +47,9 @@ import { AuthGuardService }       from '../services/auth/auth-guard.service';
 import { ScopeGuardService }      from '../services/auth/scope-guard.service';
 import { CerealAPIService }       from '../services/CerealAPI.service';      
 import { CartService }            from '../services/Cart.service';     
-import { ContextService }            from '../services/Context.service';
+import { ContextService }         from '../services/Context.service';
+import { UserAPIService }         from '../services/UserAPI.service';
+
 
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
@@ -98,10 +104,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthGuardService,
     ScopeGuardService,
     CerealAPIService,
+    UserAPIService,
     CartService,
     ContextService,
     {
-      provide: AuthHttp,
+      provide: [AuthHttp, XSRFStrategy],
+      useValue: new CookieXSRFStrategy('csrftoken', 'X-CSRFToken'),
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     }

@@ -24,6 +24,7 @@ export class ContextService {
     public lastPageVisited : String;
     public todaysColor : String = APP_CONFIG.WeekdayColor
     public profile : any;
+    public loadingProfile : boolean;
 
     // public API
     public visiting(page : String){
@@ -54,13 +55,25 @@ export class ContextService {
     }
 
     private loadUserProfile(){
-        if (this.auth.userProfile) {
-        this.profile = this.auth.userProfile;
-        } else {
-        this.auth.getProfile((err, profile) => {
-            this.profile = profile;
-        });
-        }
+        let self = this;
+        setTimeout(()=>{
+            if (self.auth.userProfile) {
+                self.profile = self.auth.userProfile;
+                this.loadingProfile = false;
+            } 
+            else {
+                if(localStorage.getItem('access_token')){
+                    self.auth.getProfile((err, profile) => {
+                        self.profile = profile;
+                        this.loadingProfile = false;
+                    });
+                }
+                else{
+                    // not logged in.
+                    this.loadingProfile = false;
+                }
+            }
+        }, 500); 
     }
 
 }

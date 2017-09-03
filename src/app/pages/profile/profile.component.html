@@ -6,17 +6,41 @@
   <!-- helpful for debugging --> 
   <pre class="elevation-2" *ngIf="false"> {{ profile | json }} </pre>
 
+  <h4>Address list</h4>
+  <ul class="addr-list">
+    <li *ngFor="let a of user_address_list; let ii = index">
+      <div class="close">
+        <button md-icon-button (click)="deleteAddress(a, ii)">
+          <md-icon class="md-24">delete</md-icon>
+        </button>
+      </div>
+      {{a.fields.name}}
+      <span>{{a.fields.address}}</span>
+    </li>
+    <li *ngIf="pick_address_name">
+      <div class="save">
+          <button md-mini-fab (click)="saveNewAddress()">
+            <md-icon class="md-24">save</md-icon>
+          </button>
+        </div>
+      <input placeholder="Address name" [style.borderColor]="_context.todaysColor" [(ngModel)]="new_address_name">
+      <span>{{new_address_info?.address}}</span>
+    </li>
+    <li 
+      *ngIf="!pick_address_name"
+      (click)="address_picker_visible_toggle=true" 
+      [style.color]="_context.todaysColor">
+      <md-icon>add_location</md-icon> <div style="display:inline-block;vertical-align: super;">Add new address</div>
+    </li>
+  </ul>
+
+  <!--
   <h4>Past orders</h4>
   <ul>
     <li></li>
   </ul>
-
-  <button md-raised-button (click)="address_picker_visible_toggle=true">new address</button>
-
-
-  
-
+  -->
 
 </md-card>
 
-<address-picker *ngIf="address_picker_visible_toggle" (addressChosenEmitter)="getAddressFromComponent($event)"></address-picker>
+<address-picker *ngIf="address_picker_visible_toggle" [metadata]="{'validationZips':APP_CONFIG.AppValues.deliveryZips}" (addressChosenEmitter)="getAddressFromComponent($event)"></address-picker>

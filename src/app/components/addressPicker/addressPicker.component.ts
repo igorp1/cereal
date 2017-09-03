@@ -23,8 +23,15 @@ export class AddressPickerComponent implements OnInit {
   @Input() 
   visible : boolean = true;
 
+  @Input()
+  metadata : any = {};
+
   @Output() 
   addressChosenEmitter = new EventEmitter();
+
+  validationMessage : string;
+
+  selectedAddress : any;
 
   /*** map variables ***/
   public searchControl: FormControl;
@@ -36,8 +43,7 @@ export class AddressPickerComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
 
-
-  setupMap(){
+  private setupMap(){
 
     this.zoom = 10;
     this.latitude = 42.343302;
@@ -63,6 +69,12 @@ export class AddressPickerComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
+
+          this.selectedAddress = {
+            'components' : place.address_components,
+            'formatted' : place.formatted_address
+          }
+
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -86,7 +98,33 @@ export class AddressPickerComponent implements OnInit {
     }
   }
 
-  confirmAddress(){
+  private isValidAddress(ADDRESS){
+    let valid = false;
+
+    // if you have the metadata to check
+    if(this.metadata.validationZips)
+    {
+      ADDRESS.components.forEach( c =>{
+        c.types.forEach(type => 
+        {
+          if(type == "postal_code")
+          {
+            this.metadata.validationZips.forEach(zip => {
+              if(zip == c.long_name){ valid = true; }  
+            });  
+          }  
+        });
+      });
+    }
+    else
+    {
+      valid = true;
+    }
+
+    return valid;
+  }
+
+  private confirmAddress(){
 
     let debugging = false;
     if(debugging){
@@ -96,19 +134,24 @@ export class AddressPickerComponent implements OnInit {
     }
 
     let ADDR = {
-      'address': this.searchElementRef.nativeElement.value,
-      'lat': this.longitude ,
+      'address': this.selectedAddress.formatted,
+      'lat': this.longitude,
       'lon': this.latitude
     }
 
-    this.addressChosenEmitter.emit(ADDR);
+    if(this.isValidAddress(this.selectedAddress)){
+      this.validationMessage = undefined;
+      this.addressChosenEmitter.emit(ADDR);
+    }
+    else{
+      this.validationMessage = "Sorry, this address is not in our delivery zone."
+    }
 
   }
 
-  close(){
+  private close(){
     //this.visible = false;
     this.addressChosenEmitter.emit(null);
   }
-
 
 }

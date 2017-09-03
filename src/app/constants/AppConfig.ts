@@ -66,7 +66,6 @@ const API_URIs = {
     "prod" : ""
 };
 
-
 let colors = [
     "#EDBB0C", // D
     "#ED7A27", // M
@@ -78,14 +77,19 @@ let colors = [
   ];
 const WEEKDAY_COLOR : string = colors[ (new Date()).getDay() ];
 
-
 const IS_DEV_ENVIRONMENT : boolean = true;
+
+const DELIVERY_ZIP_CODES : Array<string> = [
+    '02215',    // BU area => https://www.google.com.br/maps/place/Boston,+MA+02215,+EUA/
+    '02115'     // NU area => https://www.google.com.br/maps/place/Boston,+MA+02115,+EUA/
+]
 
 export const APP_CONFIG = {
     Tabs : Tabs,
     Title : Title,
     AppValues : {
-        'homeGifs' : HomeGifs
+        'homeGifs' : HomeGifs,
+        'deliveryZips' : DELIVERY_ZIP_CODES
     },
     ApiUris : API_URIs,
     isDev : IS_DEV_ENVIRONMENT,
