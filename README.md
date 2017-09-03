@@ -1,4 +1,4 @@
-# cereal
+# cereal!
 
 [![idp](https://raw.githubusercontent.com/igorp1/cereal/develop/src/assets/img/home_gifs/jake.gif)](http://cerealstop.com)
 
