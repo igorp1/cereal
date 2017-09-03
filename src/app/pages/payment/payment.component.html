@@ -36,8 +36,8 @@
             [style.borderColor]="x.selected ? _context.todaysColor : ''"
             [style.borderWidth]="x.selected ? '5px' : ''"
             (click)="toggleAddress(x)">
-        {{x.name}}<br>
-        <span>{{x.location}}</span>
+        {{x.fields.name}}<br>
+        <span>{{x.fields.address}}</span>
       </li>
     </ul>
     <p (click)="addAddress()"><md-icon [style.color]="_context.todaysColor">add_location</md-icon><span style="vertical-align: super;">Add new address</span></p>

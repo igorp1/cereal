@@ -11,6 +11,9 @@ import { MapsAPILoader, AgmCoreModule } from '@agm/core';
 })
 export class AddressPickerComponent implements OnInit {
 
+  // the real mvp:
+  // http://brianflove.com/2016/10/18/angular-2-google-maps-places-autocomplete/
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone) {

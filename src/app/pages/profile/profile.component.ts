@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit {
   loadUserAddressList(){
     this.userAPI.getAddressList().subscribe(data => {
       this.user_address_list = data;
-      console.log(this.user_address_list)
     }); 
   }
 
