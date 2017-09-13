@@ -22,7 +22,7 @@ export class PaymentComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserAddressList();
-    //this.setupMap();
+    this._cart.setOrderStatus("PAYING")
   }
 
   public addressList: Array<any>;
