@@ -89,9 +89,10 @@ export class ContextService {
             else {
                 if(localStorage.getItem('access_token')){
                     self.auth.getProfile((err, profile) => {
+                        console.log(profile)
                         if(err){
                             // clean up expired access_token
-                            localStorage.removeItem('access_token')
+                            localStorage.clear()
                         }
                         self.profile = profile;
                         self.loadingProfile = false;
@@ -99,6 +100,7 @@ export class ContextService {
                     });
                 }
                 else{
+                    localStorage.clear()
                     // not logged in.
                     this.loadingProfile = false;
                 }

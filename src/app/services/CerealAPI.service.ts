@@ -75,6 +75,14 @@ export class CerealAPIService {
 
     }
 
+    setOrderAddress(orderId,address_ID){
+        this.buildAuthorizationHeader();
+        return this.http.get(this.API_BASE + `order/${orderId}/update/address/${address_ID}`,
+        { headers: this.headers });
+    }
+
+    
+
 }
 
 

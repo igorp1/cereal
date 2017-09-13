@@ -43,6 +43,10 @@ export class PaymentComponent implements OnInit {
 
     addr.selected = !addr.selected;
 
+    if(addr.selected){
+      this._cart.setOrderAddress(addr.pk)
+    }
+
   }
 
   private addAddress(){

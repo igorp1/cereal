@@ -174,6 +174,12 @@ export class CartService {
         .subscribe()    
     }
 
+    public setOrderAddress(addressID){
+        if(!this.cartID) throw "Card Id is not present. Cannot complete request."
+        this._cereal.setOrderAddress(this.cartID, addressID)
+        .subscribe()    
+    }
+
     private isInCart(new_item): boolean {
         let exists = false;
         this.cartItems.forEach(element => {
