@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';   
 import { Http, Response } from '@angular/http';  
-import { APP_CONFIG } from '../constants/AppConfig'
-import { CerealAPIService } from './CerealAPI.service'
+import { APP_CONFIG } from '../constants/AppConfig';
+import { CerealAPIService } from './CerealAPI.service';
+import { AuthService } from './auth/auth.service';
 
 @Injectable()
 export class CartService {
     
-    constructor ( private _cereal: CerealAPIService ) { 
+    constructor ( private _cereal: CerealAPIService,
+        private auth : AuthService) { 
         this.loadFromStorage();
     }
 
@@ -16,8 +18,11 @@ export class CartService {
     public milk : Array<any> = [];
     public toppings : Array<any> = [];
 
+    public cartID : Number = null;
+    public creatingNewOrder : boolean = false;
+
     public addToCart(new_item){ 
-         
+
         if(!this.isInCart(new_item)){ 
             this.cartItems.push(new_item); 
         }
@@ -39,7 +44,6 @@ export class CartService {
             this.toppings.push(new_item);
         }
 
-        // Let's update the localStorage
         this.persist();
 
     }
@@ -143,32 +147,77 @@ export class CartService {
 
     }
 
+    public pushCartItemsToServer(cartID : Number){
+
+        if(this.cartItems.length != 0){
+            // stringfy the cart
+            let orderItems = JSON.stringify(this.cartItems)
+
+            // push order items to server =>
+            this._cereal.updateOrder(cartID, orderItems)
+            .subscribe( )
+        }
+
+    }
+
+    public persist(){
+        localStorage.setItem('CEREAL_CART', JSON.stringify(this.cartItems));
+        if(this.cartID != null) {
+            localStorage.setItem('CEREAL_CART_ID', String(this.cartID) );
+        }
+        this.persistOnServer()
+    }
+
+    public setOrderStatus(status : string){
+        if(!this.cartID) throw "Card Id is not present. Cannot complete request."
+        this._cereal.setOrderStatus(this.cartID, status)
+        .subscribe()    
+    }
+
     private isInCart(new_item): boolean {
         let exists = false;
         this.cartItems.forEach(element => {
             if(element.fields.name == new_item.fields.name){
-                console.log('already here'); exists = true;
+                exists = true;
             }
         });
         return exists;
     }
 
-    public persist(){
-        localStorage.setItem('CEREAL_CART', JSON.stringify(this.cartItems));
-
-    }
-
     private loadFromStorage(){
+        
+        this.cartID = localStorage.getItem('CEREAL_CART_ID') ? 
+                        Number(localStorage.getItem('CEREAL_CART_ID')) 
+                        : null;
         let cartItemsPersistedString = localStorage.getItem('CEREAL_CART');
         
         if(cartItemsPersistedString){
             let cartItemsPersisted = JSON.parse(cartItemsPersistedString);
-            //console.log(cartItemsPersistedString)
             cartItemsPersisted.forEach(ii => {
                 this.addToCart(ii);
             });
-        } 
+        }
+        
     }
 
+    private persistOnServer(){
+        if(this.creatingNewOrder){ return; }
+        if(localStorage.getItem('access_token') == null){ return; }
+        if(this.cartID){ 
+            this.pushCartItemsToServer(this.cartID)
+        }
+        else{
+           
+            let self = this
+            this.creatingNewOrder = true;
+            this._cereal.createOrder().subscribe(d => {
+                self.cartID = d; 
+                this.creatingNewOrder = false;
+                self.persist();
+                self.pushCartItemsToServer(this.cartID)
+            })
+            
+        }
+    }
 
 }

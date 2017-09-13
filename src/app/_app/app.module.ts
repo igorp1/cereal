@@ -49,7 +49,7 @@ import { CerealAPIService }       from '../services/CerealAPI.service';
 import { CartService }            from '../services/Cart.service';     
 import { ContextService }         from '../services/Context.service';
 import { UserAPIService }         from '../services/UserAPI.service';
-
+import { AdminAPIService }        from '../services/AdminAPI.service'
 
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
@@ -105,6 +105,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ScopeGuardService,
     CerealAPIService,
     UserAPIService,
+    AdminAPIService,
     CartService,
     ContextService,
     {

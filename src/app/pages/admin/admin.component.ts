@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Inventory } from '../../constants/Inventory'
+
+import { ContextService } from '../../services/Context.service'
+
+import { AdminAPIService } from '../../services/AdminAPI.service'
 
 @Component({
   selector: 'app-admin',
@@ -8,38 +11,76 @@ import { Inventory } from '../../constants/Inventory'
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _context : ContextService,
+          private _admin : AdminAPIService) { }
 
-  public inventory : any;
+  private inventory : any;
+  private nav : any;
+  private modal_top : number;
+
+  private restocking : any = undefined;
+  private restockAmount : number;
+  private restockError : string;
 
   ngOnInit() {
-    this.loadInventory()
+    this._context.visiting('admin');
+    this.loadInventory();
+    this.setupNav();
+  }
+
+  setupNav(){
+    this.nav = {
+      'pages': ['inventory', 'orders', 'dev'],
+      'currentPage' : null
+    }
+    // set starting page
+    this.nav.currentPage = this.nav.pages[0]
   }
 
   loadInventory(){
-    this.inventory = Inventory;
+    this._admin.getInventory().subscribe( data => { this.inventory = data} )
+  }
+
+
+  openLink(url : string){
+    window.open(url,'_blank');
+  }
+
+  openRestockModal(restockingItem : any){
+    this.modal_top = document.getElementsByClassName("mat-sidenav-content")[0].scrollTop
+    let e = document.getElementsByClassName("mat-sidenav-content")[0]  as HTMLElement
+
+    e.style.overflow = 'hidden'
+    
+    this.restocking = restockingItem
+  }
+
+  closeRestockModal(){
+    let e : HTMLElement = document.getElementsByClassName("mat-sidenav-content")[0] as HTMLElement
+    e.style.overflow = 'scroll'
+    this.restockError = ""
+    this.restocking = undefined
+  }
+
+  confirmRestockItem(){
+
+    if(this.restockAmount != Math.floor(Number(this.restockAmount)) || this.restockAmount <=0 ){
+      this.restockError = "Make sure you choose a positive whole number."
+    }
+
+    this.restocking.fields.units_stocked += this.restockAmount     
+    
+    this._admin.addToInventory(this.restocking.model, this.restocking.pk, this.restockAmount)
+      .subscribe(data => {
+        this.restockError = ""
+        this.restocking = undefined
+      })
+
   }
   
 }
 
 
-
-// HERE's some stuff I'll leave here for future reference:
-
-//import { AuthHttp } from 'angular2-jwt';
-
-// API_URL = 'http://localhost:3001/api';
-// message: string;
-
-// public adminPing(): void {
-//   this.message = '';
-//   this.authHttp.post(`${this.API_URL}/admin`, {})
-//     .map(res => res.json())
-//     .subscribe(
-//       data => this.message = data.message,
-//       error => this.message = error
-//     );
-// }
 
 
 

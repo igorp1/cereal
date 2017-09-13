@@ -93,5 +93,6 @@ export const APP_CONFIG = {
     },
     ApiUris : API_URIs,
     isDev : IS_DEV_ENVIRONMENT,
+    bypassScopeGuard : true,
     WeekdayColor : WEEKDAY_COLOR
 };

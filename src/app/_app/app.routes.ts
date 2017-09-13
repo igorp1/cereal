@@ -25,8 +25,7 @@ export const ROUTES: Routes = [
   { path: 'order/review',   component: OrderComponent },
   { path: 'order/payment',  component: PaymentComponent, canActivate: [AuthGuard] },  
   { path: 'profile',        component: ProfileComponent, canActivate: [AuthGuard] },  
-  // { path: 'admin',          component: AdminComponent, canActivate: [AuthGuard] },
-  // { path: 'admin',          component: AdminComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['admin']} }, 
+  { path: 'admin',          component: AdminComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['admin']} }, 
   { path: '**', redirectTo: '' }
 ];
  

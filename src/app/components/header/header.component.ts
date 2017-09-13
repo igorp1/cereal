@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-
+import { ContextService } from '../../services/Context.service'
 import {  APP_CONFIG  } from '../../constants/AppConfig'
 
 @Component({
@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
 
   public loadingUser = true;
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService,
+              private _context :  ContextService) { }
 
   ngOnInit() {
     this.fetchUserInfo();

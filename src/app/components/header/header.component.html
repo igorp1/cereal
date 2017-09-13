@@ -21,10 +21,14 @@
             <img [src]="User?.picture == null ? '' : User?.picture" class="avatar" alt="avatar" height="40px" style="vertical-align:middle">
             <span>{{User?.name}}</span>
           </button>
-          <!-- <button md-menu-item routerLink="about">
-            <md-icon>developer_board</md-icon>
-            <span>about</span>
-          </button> -->
+          <button md-menu-item routerLink="admin" *ngIf="_context.isUserAdmin()">
+            <md-icon>developer_mode</md-icon>
+            <span>Admin</span>
+          </button>
+          <button md-menu-item routerLink="admin" *ngIf="_context.isUserDelivery()">
+              <md-icon>directions_car</md-icon>
+              <span>Deliver</span>
+            </button>
           <button md-menu-item (click)="auth.logout()">
               <md-icon>directions_run</md-icon>
               <span>logout</span>

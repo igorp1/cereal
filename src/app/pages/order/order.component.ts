@@ -49,7 +49,12 @@ export class OrderComponent implements OnInit {
   readyToPay(){
     // the order is only saved on the application and local storage
     if (this.auth.isAuthenticated()){
+      // call api to update order to paying:
+      this._cart.setOrderStatus("PAYING")
+
+      // when loaded redirect to payment page
       this.router.navigateByUrl('order/payment');
+
     }
     else{
       this.auth.login();

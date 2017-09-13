@@ -26,9 +26,12 @@ export class UserAPIService {
         this.headers = headers;
     }
 
+    /*
+     *  ADDRESS SERVICES
+     */
     getAddressList() {
         return this.http.get(
-            this.API_BASE + "user/address/list",
+            this.API_BASE + "user/address/get",
             { headers: this.headers }
         ).map((res:Response) => res.json());
     }
@@ -48,5 +51,25 @@ export class UserAPIService {
             { headers: this.headers }
         );
     }
+
+    /*
+     *  PHONE SERVICES
+     */
+
+     /*
+     *  SCOPE SERVICE
+     */
+    getUserScopes() {
+        return this.http.get(
+            this.API_BASE + "user/scope/get",
+            { headers: this.headers }
+        ).map((res:Response) => res.json());
+    }
+
+
+
+
+
+
 
 }

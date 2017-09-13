@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { APP_CONFIG } from '../constants/AppConfig'
 import { CerealAPIService } from './CerealAPI.service'
 import { CartService } from './Cart.service'
+import { UserAPIService } from './UserAPI.service'
 
 import { AuthService } from './auth/auth.service';
 
@@ -14,7 +15,8 @@ export class ContextService {
     constructor (
         private  auth:      AuthService,
         private _cereal:    CerealAPIService,
-        private _cart:      CartService      
+        private _cart:      CartService,
+        private _user:      UserAPIService      
     ) {  
         this.loadStateFromLocalStorage();
         this.loadUserProfile();
@@ -32,7 +34,29 @@ export class ContextService {
         this.persistState();
     }
 
+    public isUserAdmin(){
+        return this.doesUserHaveScope('admin')
+    }
+
+    public isUserDelivery(){
+        return this.doesUserHaveScope('delivery')
+    }
+
+    // private member variables
+    private userScopes : Array<any> = []
+
     // private methods
+    private doesUserHaveScope(scopeName:String){
+        let check_result = false
+        this.userScopes.forEach(e => {
+            if(e == scopeName){
+                check_result = true
+            }
+        })    
+        return check_result;
+    }
+
+
     private loadStateFromLocalStorage() {
         
         let context_json_str = localStorage.getItem('CEREAL_APP_CONTEXT');
@@ -59,13 +83,19 @@ export class ContextService {
         setTimeout(()=>{
             if (self.auth.userProfile) {
                 self.profile = self.auth.userProfile;
-                this.loadingProfile = false;
+                self.loadingProfile = false;
+                self.loadUserScope();
             } 
             else {
                 if(localStorage.getItem('access_token')){
                     self.auth.getProfile((err, profile) => {
+                        if(err){
+                            // clean up expired access_token
+                            localStorage.removeItem('access_token')
+                        }
                         self.profile = profile;
-                        this.loadingProfile = false;
+                        self.loadingProfile = false;
+                        self.loadUserScope();
                     });
                 }
                 else{
@@ -74,6 +104,11 @@ export class ContextService {
                 }
             }
         }, 500); 
+    }
+
+    private loadUserScope(){
+        this._user.buildAuthorizationHeader()
+        this._user.getUserScopes().subscribe(data => { this.userScopes = data });    
     }
 
 }
