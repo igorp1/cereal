@@ -1,3 +1,11 @@
+h4{
+  margin-bottom: 0em;
+}
+
+p{
+  margin-top: .5em;
+}
+
 .user-image{
   margin: 0;    
   height: 2em;
@@ -17,13 +25,14 @@ h4.username{
   margin: 0;
 }
 
-ul.addr-list{
-  list-style: none;
-}
-
 ul.addr-list, li{
   margin: 0;
   padding: 0;
+}
+
+ul.addr-list{
+  margin-top: .5em;
+  list-style: none;
 }
 
 ul.addr-list li span{
@@ -41,7 +50,7 @@ ul.addr-list div.close, ul.addr-list div.save {
   margin-right: -.5em;
 }
 
-ul.addr-list li input{
+input{
   border: none;
   border-bottom: 2px solid;
   margin-bottom: .5em;
@@ -52,4 +61,14 @@ ul.addr-list li input{
 
 ul.addr-list li input:hover, ul.addr-list li input:active{
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+td{ padding: .3em; }
+tr.total{ font-weight: bold; }
+table, tr, td{ border: 1px solid #A0A0A0; }
+
+table{
+  margin-top: .5em;
+  border-collapse: collapse;
+  width: 100%;
 }

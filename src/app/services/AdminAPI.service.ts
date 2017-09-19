@@ -24,6 +24,7 @@ export class AdminAPIService {
     }
 
     getInventory() {
+        this.buildAuthorizationHeader()
         return this.http.get(
             this.API_BASE + "admin/inventory/get/",
             { headers: this.headers })
@@ -31,10 +32,19 @@ export class AdminAPIService {
     }
     
     addToInventory(model : string, pID : number, amount : number){
+        this.buildAuthorizationHeader()
         return this.http.get(
             this.API_BASE + `admin/inventory/add/${model}/${pID}/${amount}`,
-            { headers: this.headers })
+            { headers: this.headers }
+        )
     }
 
+    getOrders(){
+        this.buildAuthorizationHeader()
+        return this.http.get(
+            this.API_BASE + 'admin/order/get',
+            { headers: this.headers }
+        ).map((res:Response) => res.json());
+    }
 
 }

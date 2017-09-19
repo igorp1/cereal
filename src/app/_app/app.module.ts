@@ -41,6 +41,8 @@ import { ToppingsComponent } from '../pages/toppings/toppings.component';
 import { OrderComponent } from '../pages/order/order.component'; 
 import { PaymentComponent } from '../pages/payment/payment.component'; 
 import { CallbackComponent } from '../pages/callback/callback.component'; 
+import { InvoiceComponent } from '../pages/invoice/invoice.component'; 
+
 
 // import services
 import { AuthGuardService }       from '../services/auth/auth-guard.service';
@@ -49,16 +51,19 @@ import { CerealAPIService }       from '../services/CerealAPI.service';
 import { CartService }            from '../services/Cart.service';     
 import { ContextService }         from '../services/Context.service';
 import { UserAPIService }         from '../services/UserAPI.service';
-import { AdminAPIService }        from '../services/AdminAPI.service'
+import { AdminAPIService }        from '../services/AdminAPI.service';
+import { PaymentService }        from '../services/Payment.service';
 
 // UIkit components
 import { HeaderComponent }        from '../components/header/header.component';
 import { NavContainerComponent }  from '../components/navContainer/navContainer.component';
 import { StoreListItemComponent } from '../components/storeListItem/storeListItem.component';
 import { AddressPickerComponent } from '../components/addressPicker/addressPicker.component';
+import { LoadingComponent }       from '../components/loading/loading.component';
 
 // third-party libs
 import { AgmCoreModule } from '@agm/core';
+import { MomentModule } from 'angular2-moment';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -83,7 +88,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     HeaderComponent,
     NavContainerComponent,
     StoreListItemComponent,
-    AddressPickerComponent
+    AddressPickerComponent,
+    LoadingComponent,
+    InvoiceComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -97,6 +104,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MdButtonModule, MdSidenavModule, MdListModule,MdCardModule,MdMenuModule,MdInputModule,MdGridListModule,
     FormsModule,
     HttpModule,
+    MomentModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
@@ -108,6 +116,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminAPIService,
     CartService,
     ContextService,
+    PaymentService,
     {
       provide: [AuthHttp, XSRFStrategy],
       useValue: new CookieXSRFStrategy('csrftoken', 'X-CSRFToken'),

@@ -1,0 +1,23 @@
+<ng-container *ngIf="canDisplay()">
+
+  <!-- loading screen -->
+  <div *ngIf="fullscreen" class="loading-backdrop">
+    <div>
+      <img src="./assets/img/home_gifs/jake.gif" 
+          style="width:120px;height:120px;border-radius:100%;border: solid 3px #efefef;" 
+          [style.borderColor]="color"
+          class="elevation-1" >
+      <h3 style="font-family:'Roboto Mono', monospace;" class="text-elevation-1">
+          {{ message ? message : 'Loading ...' }}
+      </h3>
+    </div>
+  </div>
+    
+    
+  <!-- inline loading -->  
+  <div *ngIf="!fullscreen">
+    {{ message ? message : 'Loading ...' }}
+  </div>
+
+</ng-container>
+

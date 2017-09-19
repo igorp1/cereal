@@ -42,5 +42,18 @@
     </ul>
     <p (click)="addAddress()"><md-icon [style.color]="_context.todaysColor">add_location</md-icon><span style="vertical-align: super;">Add new address</span></p>
   </div>
+
+  <p style="color:tomato;font-size:0.8em;" *ngIf="addressMissingWarning">Please select the delivery address.</p>
+
+  <div style="margin-left:0.7em;height:2em;margin-top:1.5em;display: flex;align-items: center;justify-content: center;">
+    <button md-raised-button style="float:right;border: 2px solid #00C991" (click)="openPaymentModal()" *ngIf="auth.isAuthenticated()">
+      <md-icon>credit_card</md-icon> PAY
+    </button>
+  </div>
   
 </md-card>
+
+<loading [isLoading]="[loadingPaymentProcessing]" 
+      [color]="_context.todaysColor" 
+      [fullscreen]="true" 
+      [message]=" 'One second while we process your payment.' " ></loading>

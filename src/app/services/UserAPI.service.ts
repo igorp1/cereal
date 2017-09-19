@@ -26,10 +26,9 @@ export class UserAPIService {
         this.headers = headers;
     }
 
-    /*
-     *  ADDRESS SERVICES
-     */
+    //======= ADDRESS SERVICES
     getAddressList() {
+        this.buildAuthorizationHeader()
         return this.http.get(
             this.API_BASE + "user/address/get",
             { headers: this.headers }
@@ -37,6 +36,7 @@ export class UserAPIService {
     }
 
     deleteAddressRecord(primaryKey : number){
+        this.buildAuthorizationHeader()
         return this.http.post(
             this.API_BASE + "user/address/delete/",
             { 'address_id' : primaryKey },
@@ -45,6 +45,7 @@ export class UserAPIService {
     }
 
     saveNewAddress(addr_obj: any){
+        this.buildAuthorizationHeader()
         return this.http.post(
             this.API_BASE + "user/address/add/",
             addr_obj,
@@ -52,14 +53,44 @@ export class UserAPIService {
         );
     }
 
-    /*
-     *  PHONE SERVICES
-     */
+    //======= ORDER SERVICES
+    getOrderById(id : number){
+        this.buildAuthorizationHeader()
+        return this.http.get(
+            this.API_BASE + `order/${id}/get`,
+            { headers: this.headers }
+        ).map((res:Response) => res.json());
+    } 
 
-     /*
-     *  SCOPE SERVICE
-     */
+    getOrders(){
+        this.buildAuthorizationHeader()
+        return this.http.get(
+            this.API_BASE + `user/order/get`,
+            { headers: this.headers }
+        ).map((res:Response) => res.json());
+    }
+
+    //======= PHONE SERVICES
+    getPhoneNumber(){
+        this.buildAuthorizationHeader()
+        return this.http.get(
+            this.API_BASE + `user/phone/get`,
+            { headers: this.headers }
+        ).map((res:Response) => res.json());
+    }
+
+    updatePhoneNumber(number : string){
+        this.buildAuthorizationHeader()
+        return this.http.post(
+            this.API_BASE + "user/phone/update/",
+            { 'p': number },
+            { headers: this.headers }
+        );
+    }
+
+    //======= SCOPE SERVICE
     getUserScopes() {
+        this.buildAuthorizationHeader()
         return this.http.get(
             this.API_BASE + "user/scope/get",
             { headers: this.headers }

@@ -7,4 +7,12 @@
     <p>{{section.text}}</p>            
   </ng-container>
 
+  <button md-raised-button [style.borderColor]="_context.todaysColor" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">
+    Login/Signup
+  </button> 
+
+  <button md-raised-button [style.borderColor]="_context.todaysColor" (click)="buildABowl()">
+    Build your bowl
+  </button> 
+
 </md-card>

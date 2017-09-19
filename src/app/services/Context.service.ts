@@ -56,7 +56,6 @@ export class ContextService {
         return check_result;
     }
 
-
     private loadStateFromLocalStorage() {
         
         let context_json_str = localStorage.getItem('CEREAL_APP_CONTEXT');
@@ -79,6 +78,7 @@ export class ContextService {
     }
 
     private loadUserProfile(){
+        console.log('loading profile')
         let self = this;
         setTimeout(()=>{
             if (self.auth.userProfile) {
@@ -89,7 +89,6 @@ export class ContextService {
             else {
                 if(localStorage.getItem('access_token')){
                     self.auth.getProfile((err, profile) => {
-                        console.log(profile)
                         if(err){
                             // clean up expired access_token
                             localStorage.clear()

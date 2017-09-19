@@ -94,5 +94,6 @@ export const APP_CONFIG = {
     ApiUris : API_URIs,
     isDev : IS_DEV_ENVIRONMENT,
     bypassScopeGuard : true,
-    WeekdayColor : WEEKDAY_COLOR
+    WeekdayColor : WEEKDAY_COLOR,
+    stripeKey : 'pk_test_GQVtJH0KZinfV0fLbDqj3qwV'
 };

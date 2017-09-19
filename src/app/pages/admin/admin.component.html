@@ -60,11 +60,11 @@
               <td>User</td>
             </thead>
             <tbody>
-              <tr>
-                <td>11:33PM</td>
-                <td>$10.33</td>
-                <td>OPEN</td>
-                <td>igordepaula1@gmail.com</td>
+              <tr *ngFor="let x of orderList">
+                <td>{{ x.ordered_date_time | amLocal | amDateFormat:'DD/MM/YYYY HH:mm A' }}</td>
+                <td>{{calcPrice(x.cart) | number : '1.2-2'}}</td>
+                <td>{{x.status}}</td>
+                <td>{{x.user}}</td>
               </tr>
             </tbody>
           </table>

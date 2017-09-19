@@ -10,6 +10,7 @@ import { ToppingsComponent } from '../pages/toppings/toppings.component';
 import { OrderComponent } from '../pages/order/order.component'; 
 import { PaymentComponent } from '../pages/payment/payment.component'; 
 import { CallbackComponent } from '../pages/callback/callback.component'; 
+import { InvoiceComponent } from '../pages/invoice/invoice.component'; 
 
 
 import { AuthGuardService as AuthGuard } from '../services/auth/auth-guard.service';
@@ -24,6 +25,7 @@ export const ROUTES: Routes = [
   { path: 'order/toppings', component: ToppingsComponent },
   { path: 'order/review',   component: OrderComponent },
   { path: 'order/payment',  component: PaymentComponent, canActivate: [AuthGuard] },  
+  { path: 'order/:orderid', component: InvoiceComponent, canActivate: [AuthGuard] },  
   { path: 'profile',        component: ProfileComponent, canActivate: [AuthGuard] },  
   { path: 'admin',          component: AdminComponent, canActivate: [ScopeGuard], data: { expectedScopes: ['admin']} }, 
   { path: '**', redirectTo: '' }

@@ -89,6 +89,17 @@ export class CartService {
 
     }
 
+    public clearCart(){
+        this.cartItems = []
+        this.cereal = []
+        this.milk = []
+        this.toppings = []
+
+        localStorage.removeItem('CEREAL_CART_ID');
+        localStorage.removeItem('CEREAL_CART');
+
+    }
+
     public getCerealStrings(){
         let str_list : Array<string> = [];
 
@@ -134,7 +145,7 @@ export class CartService {
         return items_array
     }
 
-    public calculateTotal(){
+    public calculateTotal(returnInCents : boolean = false){
         
         let total = 0;
         let DELIVERY = 3;
@@ -143,7 +154,7 @@ export class CartService {
             total += ii.fields.price * ii.count;
         });
 
-        return total + DELIVERY;        
+        return (total + DELIVERY) * ( returnInCents ? 100 : 1 ) ;        
 
     }
 

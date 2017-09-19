@@ -2,3 +2,6 @@ h4.section-title{
     text-decoration: underline; 
     font-weight: normal;
 }
+
+
+button{margin: .2em; border: 3px solid black;}

@@ -17,6 +17,7 @@ export class AdminComponent implements OnInit {
   private inventory : any;
   private nav : any;
   private modal_top : number;
+  private orderList : Array<any>;
 
   private restocking : any = undefined;
   private restockAmount : number;
@@ -26,6 +27,7 @@ export class AdminComponent implements OnInit {
     this._context.visiting('admin');
     this.loadInventory();
     this.setupNav();
+    this.loadOrders()
   }
 
   setupNav(){
@@ -39,6 +41,10 @@ export class AdminComponent implements OnInit {
 
   loadInventory(){
     this._admin.getInventory().subscribe( data => { this.inventory = data} )
+  }
+
+  loadOrders(){
+    this._admin.getOrders().subscribe( data => { this.orderList = data} )
   }
 
 
@@ -78,6 +84,21 @@ export class AdminComponent implements OnInit {
 
   }
   
+  calcPrice(cart : any): number{
+    
+    let sum = 0
+    let deliveryprice = 3
+
+    cart.forEach(cartItem => {
+      sum += cartItem.count * cartItem.fields.price
+    });
+
+    return sum + deliveryprice
+
+
+  }
+
+
 }
 
 
