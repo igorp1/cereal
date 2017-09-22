@@ -19,6 +19,7 @@ export class MilkComponent implements OnInit {
     private router : Router) { }
 
   public milkList : Array<any>;
+  public loadingMilk : boolean = true;
 
   ngOnInit() {
     this._context.visiting('order/milk');
@@ -26,8 +27,10 @@ export class MilkComponent implements OnInit {
   }
 
   loadMilk(){
+    this.loadingMilk = true;
     this._cerealAPI.getMilk().subscribe(data => {
       this.milkList = this._cart.updateLoadedItems(data, 'milk'); 
+      this.loadingMilk = false;
     });  
   }
 

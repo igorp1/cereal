@@ -15,7 +15,9 @@
     
     
   <!-- inline loading -->  
-  <div *ngIf="!fullscreen">
+  <div *ngIf="!fullscreen" class="loading-inline">
+    <img src="assets/img/loading.gif"/>
+    <br>
     {{ message ? message : 'Loading ...' }}
   </div>
 

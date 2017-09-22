@@ -18,7 +18,7 @@
           {{PageConfig.blurb}}
         </p>
 
-        <button md-raised-button *ngFor="let b of PageConfig.welcomeLinks" [style.borderColor]="b.color" routerLink="{{b.link}}">
+        <button md-raised-button *ngFor="let b of PageConfig.welcomeLinks" [style.borderColor]="b.color" routerLink="/{{b.link}}">
           {{b.label}}
         </button> 
       </div> 

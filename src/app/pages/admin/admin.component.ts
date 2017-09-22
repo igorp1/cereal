@@ -18,6 +18,14 @@ export class AdminComponent implements OnInit {
   private nav : any;
   private modal_top : number;
   private orderList : Array<any>;
+  private orderList_metadata : any = {
+    columns : [
+      { name : 'ordered_date_time', dataType : 'dateTime', title : 'Time' },
+      //{ name : 'price', dataType : 'money', title : '$$$'  },
+      { name : 'status', dataType : 'text', title : 'Status'  },
+      { name : ['user','email'] , dataType : 'text', title : 'User'  },
+    ]
+  }
 
   private restocking : any = undefined;
   private restockAmount : number;
@@ -46,7 +54,6 @@ export class AdminComponent implements OnInit {
   loadOrders(){
     this._admin.getOrders().subscribe( data => { this.orderList = data} )
   }
-
 
   openLink(url : string){
     window.open(url,'_blank');
@@ -97,6 +104,11 @@ export class AdminComponent implements OnInit {
 
 
   }
+
+  
+
+
+
 
 
 }

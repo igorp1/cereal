@@ -11,7 +11,7 @@ import { APP_CONFIG } from '../constants/AppConfig'
 export class PaymentService {
 
     constructor(private _context : ContextService, private http: Http ){
-        this.API_BASE = APP_CONFIG.isDev ? APP_CONFIG.ApiUris.dev : APP_CONFIG.ApiUris.prod;
+        this.API_BASE = APP_CONFIG.ApiUris[APP_CONFIG.env]
         this.buildAuthorizationHeader();
     }
 

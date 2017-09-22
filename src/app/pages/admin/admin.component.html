@@ -47,42 +47,22 @@
 
       <!-- orders view -->
       <div *ngIf="nav.currentPage == 'orders' ">
-      <div class="section-header">
-        <button md-raised-button [style.border]=" 'solid 3px ' + _context.todaysColor "><md-icon>directions_car</md-icon> Delivery Dashboard</button>
-      </div>  
-      <hr>
-      <div style="overflow-x:scroll">
-        <table>
-            <thead>
-              <td>Time</td>
-              <td>$$$</td>
-              <td>Status</td>
-              <td>User</td>
-            </thead>
-            <tbody>
-              <tr *ngFor="let x of orderList">
-                <td>{{ x.ordered_date_time | amLocal | amDateFormat:'DD/MM/YYYY HH:mm A' }}</td>
-                <td>{{calcPrice(x.cart) | number : '1.2-2'}}</td>
-                <td>{{x.status}}</td>
-                <td>{{x.user}}</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
-
-
-
-
+        
+        <div class="section-header">
+          <button md-raised-button [style.border]=" 'solid 3px ' + _context.todaysColor "><md-icon>directions_car</md-icon> Delivery Dashboard</button>
+        </div>  
+        <hr>
+        <div style="overflow-x:scroll">
+          <a-table [data]="orderList" [metadata]="orderList_metadata"></a-table>
+        </div>
       </div>
 
       <!-- dev view -->
       <div *ngIf="nav.currentPage == 'dev' ">
-        
         <div style="text-align:center; color:#c5c5c5" *ngIf="true">
             <br> ¯\_(ツ)_/¯  <br>
             Nothing to see here
         </div>
-        
       </div>
       
     </div>

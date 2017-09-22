@@ -25,8 +25,8 @@ export class LoadingComponent implements OnInit {
   ngOnInit() { } 
 
   canDisplay(){
-    let visible = false;
-    this.isLoading.forEach( ii => visible = ii ? true : visible )
+    let visible = true;
+    this.isLoading.forEach( ii => {visible = !ii ? false : visible} )
     return visible;
   }
 

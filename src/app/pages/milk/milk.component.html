@@ -2,17 +2,19 @@
     
     <h3>Pick milk</h3>
 
+    <loading [isLoading]="[loadingMilk]"></loading>
+
     <div class="main-list">
         <ul>
-        <ng-container *ngFor="let x of milkList">
-            <store-li 
-            [name]="x.fields.name" 
-            [image]="x.fields.image_link" 
-            [color]="x.fields.color" 
-            [count]="x.count"
-            [unit]="{'singular':'bottle','plural':'bottles'}"
-            (incrementCount)="addToCart($event, x)"></store-li>
-        </ng-container>
+            <ng-container *ngFor="let x of milkList">
+                <store-li 
+                [name]="x.fields.name" 
+                [image]="x.fields.image_link" 
+                [color]="x.fields.color" 
+                [count]="x.count"
+                [unit]="{'singular':'bottle','plural':'bottles'}"
+                (incrementCount)="addToCart($event, x)"></store-li>
+            </ng-container>
         </ul>
     </div>
 

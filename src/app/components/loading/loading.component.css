@@ -10,11 +10,15 @@ div.loading-backdrop{
     background-color: #f7f7f7;
 }
 
-
 div.loading-backdrop div{
     width: 100vw;
     padding: 1em;
     text-align: center;
     margin-top: auto;
     margin-bottom: auto;
+}
+
+div.loading-inline{
+    width: 100%;
+    text-align: center;
 }

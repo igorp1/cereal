@@ -20,6 +20,7 @@ export class InvoiceComponent implements OnInit {
 
   constructor(public auth: AuthService,
               private _context : ContextService,
+              private _cart : CartService,
               private userAPI : UserAPIService,
               private router : Router,
               private route : ActivatedRoute) { }
@@ -47,22 +48,5 @@ export class InvoiceComponent implements OnInit {
 
 
   }
-
-  calcTotalFromModel() : Number{
-
-    if(!this.orderModel) return
-
-    let sum = 0
-    let deliveryprice = 3
-
-    this.orderModel.cart.forEach(cartItem => {
-      sum += cartItem.count * cartItem.fields.price
-    });
-
-    return sum + deliveryprice
-
-  }
-
-
 
 }

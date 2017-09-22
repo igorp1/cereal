@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';   
 import { Http, Response } from '@angular/http';  
-import { APP_CONFIG } from '../constants/AppConfig'
-import { CerealAPIService } from './CerealAPI.service'
-import { CartService } from './Cart.service'
-import { UserAPIService } from './UserAPI.service'
-
 import { AuthService } from './auth/auth.service';
+
+import { CerealAPIService } from './CerealAPI.service';
+import { UserAPIService } from './UserAPI.service';
+import { CartService } from './Cart.service';
+
+import { APP_CONFIG } from '../constants/AppConfig';
 
 
 @Injectable()
@@ -40,6 +41,10 @@ export class ContextService {
 
     public isUserDelivery(){
         return this.doesUserHaveScope('delivery')
+    }
+
+    public loadAPPConfig(){
+        return APP_CONFIG;
     }
 
     // private member variables
@@ -78,7 +83,6 @@ export class ContextService {
     }
 
     private loadUserProfile(){
-        console.log('loading profile')
         let self = this;
         setTimeout(()=>{
             if (self.auth.userProfile) {
@@ -93,9 +97,12 @@ export class ContextService {
                             // clean up expired access_token
                             localStorage.clear()
                         }
-                        self.profile = profile;
-                        self.loadingProfile = false;
-                        self.loadUserScope();
+                        else{
+                            self.profile = profile;
+                            self.loadingProfile = false;
+                            self.loadUserScope();
+                            self.registerEmail(profile['email']);
+                        }
                     });
                 }
                 else{
@@ -112,4 +119,7 @@ export class ContextService {
         this._user.getUserScopes().subscribe(data => { this.userScopes = data });    
     }
 
+    private registerEmail(email : string){
+        this._user.registerEmail(email).subscribe()
+    }
 }

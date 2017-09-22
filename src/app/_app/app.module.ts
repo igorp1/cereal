@@ -43,7 +43,6 @@ import { PaymentComponent } from '../pages/payment/payment.component';
 import { CallbackComponent } from '../pages/callback/callback.component'; 
 import { InvoiceComponent } from '../pages/invoice/invoice.component'; 
 
-
 // import services
 import { AuthGuardService }       from '../services/auth/auth-guard.service';
 import { ScopeGuardService }      from '../services/auth/scope-guard.service';
@@ -60,6 +59,8 @@ import { NavContainerComponent }  from '../components/navContainer/navContainer.
 import { StoreListItemComponent } from '../components/storeListItem/storeListItem.component';
 import { AddressPickerComponent } from '../components/addressPicker/addressPicker.component';
 import { LoadingComponent }       from '../components/loading/loading.component';
+import { TableComponent }       from '../components/table/table.component';
+import { CartSummaryComponent }       from '../components/cartSummary/cartSummary.component';
 
 // third-party libs
 import { AgmCoreModule } from '@agm/core';
@@ -74,23 +75,48 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @NgModule({
   declarations: [
+    // app
     AppComponent,
+    // pages
     HomeComponent,
+    AboutComponent,
     AdminComponent,
     ProfileComponent,
-    AboutComponent ,
     CerealComponent,
     MilkComponent,
     ToppingsComponent,
     OrderComponent,
     PaymentComponent,
     CallbackComponent,
+    // ui-kit components
     HeaderComponent,
     NavContainerComponent,
     StoreListItemComponent,
     AddressPickerComponent,
     LoadingComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    TableComponent,
+    CartSummaryComponent
+  ],
+  providers: [
+    // my services
+    CerealAPIService,
+    UserAPIService,
+    AdminAPIService,
+    CartService,
+    ContextService,
+    PaymentService,
+    // auth services
+    AuthService,
+    AuthGuardService,
+    ScopeGuardService,
+    // 3rd party services
+    {
+      provide: [AuthHttp, XSRFStrategy],
+      useValue: new CookieXSRFStrategy('csrftoken', 'X-CSRFToken'),
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -101,29 +127,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     MaterialModule,
     BrowserAnimationsModule,
-    MdButtonModule, MdSidenavModule, MdListModule,MdCardModule,MdMenuModule,MdInputModule,MdGridListModule,
+    MdButtonModule,MdSidenavModule,MdListModule,MdCardModule,MdMenuModule,MdInputModule,MdGridListModule,
     FormsModule,
     HttpModule,
     MomentModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [
-    AuthService,
-    AuthGuardService,
-    ScopeGuardService,
-    CerealAPIService,
-    UserAPIService,
-    AdminAPIService,
-    CartService,
-    ContextService,
-    PaymentService,
-    {
-      provide: [AuthHttp, XSRFStrategy],
-      useValue: new CookieXSRFStrategy('csrftoken', 'X-CSRFToken'),
-      useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
-    }
-  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] 
 })
 export class AppModule { }

@@ -18,8 +18,10 @@ export class CartService {
     public milk : Array<any> = [];
     public toppings : Array<any> = [];
 
-    public cartID : Number = null;
+    public cartID : number = null;
     public creatingNewOrder : boolean = false;
+
+    public deliveryCost : number =  APP_CONFIG.AppValues.deliveryCost
 
     public addToCart(new_item){ 
 
@@ -32,15 +34,12 @@ export class CartService {
         }
 
         if(new_item.model.indexOf('.cereal') != -1 ){
-            if(APP_CONFIG.isDev) console.log(new_item)
             this.cereal.push(new_item); 
         }
         else if(new_item.model.indexOf('.milk') != -1 ){
-            if(APP_CONFIG.isDev) console.log(new_item)
             this.milk.push(new_item); 
         }
         else if(new_item.model.indexOf('.topping') != -1 ){
-            if(APP_CONFIG.isDev) console.log(new_item)
             this.toppings.push(new_item);
         }
 
@@ -61,7 +60,6 @@ export class CartService {
         }
 
         if(item.model.indexOf('.cereal') != -1 ){
-            if(APP_CONFIG.isDev) console.log(item);
             for(let i=0; i<this.cereal.length; i++){
                 if(this.cereal[i].fields.name == item.fields.name){
                     this.cereal.splice(i, 1);
@@ -69,7 +67,6 @@ export class CartService {
             }
         }
         else if(item.model.indexOf('.milk') != -1 ){
-            if(APP_CONFIG.isDev) console.log(item)
             for(let i=0; i<this.milk.length; i++){
                 if(this.milk[i].fields.name == item.fields.name){
                     this.milk.splice(i, 1);
@@ -77,7 +74,6 @@ export class CartService {
             }
         }
         else if(item.model.indexOf('.topping') != -1 ){
-            if(APP_CONFIG.isDev) console.log(item);
             for(let i=0; i<this.toppings.length; i++){
                 if(this.toppings[i].fields.name == item.fields.name){
                     this.toppings.splice(i, 1);
@@ -145,12 +141,13 @@ export class CartService {
         return items_array
     }
 
-    public calculateTotal(returnInCents : boolean = false){
+    public calculateTotal(returnInCents : boolean = false, cartItems : Array<any> = null){
         
         let total = 0;
-        let DELIVERY = 3;
+        let DELIVERY = this.deliveryCost;
+        let cart = cartItems ? cartItems : this.cartItems
 
-        this.cartItems.forEach( ii => {
+        cart.forEach( ii => {
             total += ii.fields.price * ii.count;
         });
 

@@ -62,7 +62,7 @@ const HomeGifs = [
 ];
 
 const API_URIs = {
-    "dev": "http://localhost:8000/api/v0/",
+    "dev" : "http://localhost:8000/api/v0/",
     "prod" : ""
 };
 
@@ -84,15 +84,22 @@ const DELIVERY_ZIP_CODES : Array<string> = [
     '02115'     // NU area => https://www.google.com.br/maps/place/Boston,+MA+02115,+EUA/
 ]
 
+const AppEnvironment = [
+    'dev',
+    'prod'
+]
+const currentEnv = AppEnvironment[0]
+
 export const APP_CONFIG = {
     Tabs : Tabs,
     Title : Title,
     AppValues : {
         'homeGifs' : HomeGifs,
-        'deliveryZips' : DELIVERY_ZIP_CODES
+        'deliveryZips' : DELIVERY_ZIP_CODES,
+        'deliveryCost' : 3.00
     },
     ApiUris : API_URIs,
-    isDev : IS_DEV_ENVIRONMENT,
+    env : currentEnv,
     bypassScopeGuard : true,
     WeekdayColor : WEEKDAY_COLOR,
     stripeKey : 'pk_test_GQVtJH0KZinfV0fLbDqj3qwV'

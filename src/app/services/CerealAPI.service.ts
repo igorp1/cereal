@@ -7,7 +7,7 @@ import { APP_CONFIG } from '../constants/AppConfig'
 @Injectable()
 export class CerealAPIService {
     constructor ( private http: Http ) {
-        this.API_BASE = APP_CONFIG.isDev ? APP_CONFIG.ApiUris.dev : APP_CONFIG.ApiUris.prod;
+        this.API_BASE = APP_CONFIG.ApiUris[APP_CONFIG.env]
         this.buildAuthorizationHeader();
     }
 

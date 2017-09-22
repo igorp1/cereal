@@ -84,6 +84,10 @@ export class PaymentComponent implements OnInit {
   }
 
   private openPaymentModal(){
+
+    // sync the cart on the server
+    this._cart.pushCartItemsToServer(this._cart.cartID)
+
     let anySelected = false;
     this.addressList.forEach(ii =>{
       anySelected = anySelected || ii.selected;

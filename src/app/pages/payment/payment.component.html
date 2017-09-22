@@ -3,7 +3,8 @@
   <h3>Payment</h3>
 
   <h4>Order summary</h4>
-  <table class="summary elevation-1">
+  <cart-summary [cart]="_cart.cereal.concat(_cart.milk).concat(_cart.toppings)" [deliveryCost]="_cart.deliveryCost"></cart-summary>
+  <!-- <table class="summary elevation-1">
     
     <tr *ngFor="let x of _cart.cereal">
       <td>{{x.count}}x {{x.fields.name}}</td>
@@ -25,7 +26,7 @@
       <td>Total</td>
       <td style="text-align:right;">$ {{_cart.calculateTotal() | number : '1.2-2'}}</td>
     </tr>
-  </table>
+  </table> -->
 
 
   <h4>Where should we deliver?</h4>

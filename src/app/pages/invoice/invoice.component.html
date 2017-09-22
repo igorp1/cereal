@@ -6,84 +6,10 @@
     {{ orderModel?.ordered_date_time | amLocal | amDateFormat: 'HH:mm A' }}
   </h4>
 
-  <table class="summary elevation-1">
-    <tr *ngFor="let x of orderModel?.cart">
-      <td>{{x.count}}x {{x.fields.name}}</td>
-      <td style="text-align:right;">$ {{x.fields.price * x.count | number : '1.2-2'}}</td>
-    </tr>
-    <tr>
-      <td>Delivery</td>
-      <td style="text-align:right;">$ 3.00</td>
-    </tr>
-    <tr class="total">
-      <td>Total</td>
-      <td style="text-align:right;">$ {{ calcTotalFromModel() | number : '1.2-2'}}</td>
-    </tr>
-  </table>
+  <cart-summary [cart]="orderModel?.cart" [deliveryCost]="_cart.deliveryCost"></cart-summary>
 
   <p>
     Order status : <b [style.color]="_context.todaysColor">{{orderModel?.status}}</b>
   </p>
 
 </md-card>
-
-
-<!--
-
-
-  <button md-button [style.color]="todayColor" routerLink="/order/cereal" >
-    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Cereal
-  </button>
-  <p class="no-items" *ngIf="_cart.getCerealStrings().length == 0">{{noItemText}}</p>
-  <ul>
-    <li *ngFor="let i of _cart.cereal" [style.borderColor]="todayColor">
-        <p>{{i.fields.name}}</p>
-        <div class="amount elevation-1 animated-transitions">
-            <button (click)="minusOneOnCart(i)" class="minus animated-transitions" [style.borderColor]="todayColor">−</button>
-            <p [style.borderColor]="todayColor">{{i.count}}</p>
-            <button (click)="plusOneOnCart(i)"  class="plus animated-transitions" [style.borderColor]="todayColor">+</button>
-        </div>
-    </li>
-  </ul>
-
-  <button md-button [style.color]="todayColor" routerLink="/order/milk" >
-    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Milk
-  </button>
-  <p class="no-items" *ngIf="_cart.getMilkStrings().length == 0">{{noItemText}}</p>
-  <ul>
-    <li *ngFor="let i of _cart.milk" [style.borderColor]="todayColor">
-      <p>{{i.fields.name}}</p>
-      <div class="amount elevation-1 animated-transitions">
-          <button (click)="minusOneOnCart(i)" class="minus animated-transitions" [style.borderColor]="todayColor">−</button>
-          <p [style.borderColor]="todayColor">{{i.count}}</p>
-          <button (click)="plusOneOnCart(i)"  class="plus animated-transitions" [style.borderColor]="todayColor">+</button>
-      </div>
-    </li>
-  </ul>
-
-  <button md-button [style.color]="todayColor" routerLink="/order/toppings" >
-    <md-icon style="margin-top:-.1em;">add_shopping_cart</md-icon> Toppings
-  </button>
-  <p class="no-items" *ngIf="_cart.getToppingsStrings().length == 0">{{noItemText}}</p>
-  <ul>
-    <li *ngFor="let i of _cart.toppings" [style.borderColor]="todayColor">
-      <p>{{i.fields.name}}</p>
-      <div class="amount elevation-1 animated-transitions">
-          <button (click)="minusOneOnCart(i)" class="minus animated-transitions" [style.borderColor]="todayColor">−</button>
-          <p [style.borderColor]="todayColor">{{i.count}}</p>
-          <button (click)="plusOneOnCart(i)"  class="plus animated-transitions" [style.borderColor]="todayColor">+</button>
-      </div>
-    </li>
-  </ul>
-
-  <div style="margin-left:0.7em;height:2em;margin-top:1.5em;">
-      <button md-raised-button style="float:right;border: 2px solid #00C991" (click)="readyToPay()" *ngIf="auth.isAuthenticated()">
-        <md-icon>credit_card</md-icon> Ready to pay!
-      </button>
-      <button md-raised-button style="float:right;border: 2px solid #00C991" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">
-        <md-icon>face</md-icon> Login/Signup
-      </button>
-  </div>
-
-
--->

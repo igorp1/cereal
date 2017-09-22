@@ -5,13 +5,15 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { AuthService } from './auth/auth.service';
 import { APP_CONFIG } from '../constants/AppConfig'
 
 @Injectable()
 export class UserAPIService {
 
-    constructor ( private http: Http ) {
-        this.API_BASE = APP_CONFIG.isDev ? APP_CONFIG.ApiUris.dev : APP_CONFIG.ApiUris.prod;
+    constructor ( private http: Http, 
+                private  auth: AuthService, ) {
+        this.API_BASE = APP_CONFIG.ApiUris[APP_CONFIG.env]
         this.buildAuthorizationHeader();
     }
 
@@ -84,6 +86,15 @@ export class UserAPIService {
         return this.http.post(
             this.API_BASE + "user/phone/update/",
             { 'p': number },
+            { headers: this.headers }
+        );
+    }
+
+    //======= EMAIL SERVICE
+    registerEmail(email: string){
+        return this.http.post(
+            this.API_BASE + "user/email/update/",
+            { 'email': email },
             { headers: this.headers }
         );
     }
