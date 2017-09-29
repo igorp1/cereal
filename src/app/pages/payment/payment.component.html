@@ -1,0 +1,60 @@
+<md-card class="main-card">  
+
+  <h3>Payment</h3>
+
+  <h4>Order summary</h4>
+  <cart-summary [cart]="_cart.cereal.concat(_cart.milk).concat(_cart.toppings)" [deliveryCost]="_cart.deliveryCost"></cart-summary>
+  <!-- <table class="summary elevation-1">
+    
+    <tr *ngFor="let x of _cart.cereal">
+      <td>{{x.count}}x {{x.fields.name}}</td>
+      <td style="text-align:right;">$ {{x.fields.price * x.count | number : '1.2-2'}}</td>
+    </tr>
+    <tr *ngFor="let x of _cart.milk">
+        <td>{{x.count}}x {{x.fields.name}}</td>
+        <td style="text-align:right;">$ {{x.fields.price * x.count | number : '1.2-2'}}</td>
+      </tr>
+    <tr *ngFor="let x of _cart.toppings">
+      <td>{{x.count}}x {{x.fields.name}}</td>
+      <td style="text-align:right;">$ {{x.fields.price * x.count | number : '1.2-2'}}</td>
+    </tr>
+    <tr>
+      <td>Delivery</td>
+      <td style="text-align:right;">$ 3.00</td>
+    </tr>
+    <tr class="total">
+      <td>Total</td>
+      <td style="text-align:right;">$ {{_cart.calculateTotal() | number : '1.2-2'}}</td>
+    </tr>
+  </table> -->
+
+
+  <h4>Where should we deliver?</h4>
+  <div class="address-list">
+    <ul>
+      <li *ngFor="let x of addressList" 
+            class="elevation-1 animated-transitions" 
+            [style.borderColor]="x.selected ? _context.todaysColor : ''"
+            [style.borderWidth]="x.selected ? '5px' : ''"
+            (click)="toggleAddress(x)">
+        {{x.fields.name}}<br>
+        <span>{{x.fields.address}}</span>
+      </li>
+    </ul>
+    <p (click)="addAddress()"><md-icon [style.color]="_context.todaysColor">add_location</md-icon><span style="vertical-align: super;">Add new address</span></p>
+  </div>
+
+  <p style="color:tomato;font-size:0.8em;" *ngIf="addressMissingWarning">Please select the delivery address.</p>
+
+  <div style="margin-left:0.7em;height:2em;margin-top:1.5em;display: flex;align-items: center;justify-content: center;">
+    <button md-raised-button style="float:right;border: 2px solid #00C991" (click)="openPaymentModal()" *ngIf="auth.isAuthenticated()">
+      <md-icon>credit_card</md-icon> PAY
+    </button>
+  </div>
+  
+</md-card>
+
+<loading [isLoading]="[loadingPaymentProcessing]" 
+      [color]="_context.todaysColor" 
+      [fullscreen]="true" 
+      [message]=" 'One second while we process your payment.' " ></loading>

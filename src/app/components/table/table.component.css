@@ -1,0 +1,26 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid #AFAFAF;
+}
+
+thead > td{
+    text-align: center;
+}
+
+tr > td{
+    padding: .2em
+}
+
+tr:hover{
+    background-color: #E3E3E3;
+    cursor: pointer;
+}
+
+tr:active{
+    background-color: #191919;
+    color: #FFF;
+}

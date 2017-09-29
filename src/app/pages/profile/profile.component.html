@@ -1,0 +1,78 @@
+<md-card class="main-card">
+  
+  <img [src]="_context.profile?.picture" *ngIf="_context.profile" class="user-image elevation-1">
+  <h4 class="username">{{ _context.profile?.name }}</h4>
+
+  <!-- helpful for debugging --> 
+  <pre class="elevation-2" *ngIf="false"> {{ profile | json }} </pre>
+
+
+  <h4>Phone Number</h4>
+  <div *ngIf="!editingPhoneNumber">
+    <p style="display: inline-flex;">{{userPhoneNumber}}</p>
+    <button md-icon-button (click)="editingPhoneNumber = true" style="display: inline-flex;float: right;vertical-align: super; ">
+      <md-icon class="md-24" style="vertical-align: baseline;">settings_phone</md-icon>
+    </button>
+  </div>
+  <div [style.color]="_context.todaysColor" (click)="editingPhoneNumber = true" *ngIf="!userPhoneNumber && !editingPhoneNumber">
+      <md-icon>phone_iphone</md-icon> 
+      <div style="display:inline-block;vertical-align: super;">Add phone number</div>
+  </div>
+  <ng-container *ngIf="editingPhoneNumber">
+    <input placeholder="phone number" [style.borderColor]="_context.todaysColor" [(ngModel)]="userPhoneNumber">
+    <div class="save" style="display:inline-block" >
+      <button md-icon-button (click)="updatePhoneNumber()">
+        <md-icon class="md-24">save</md-icon>
+      </button>
+    </div>
+  </ng-container>
+
+
+  <h4>Address list</h4>
+  <ul class="addr-list">
+    <li *ngFor="let a of user_address_list; let ii = index">
+      <div class="close">
+        <button md-icon-button (click)="deleteAddress(a, ii)">
+          <md-icon class="md-24">delete</md-icon>
+        </button>
+      </div>
+      {{a.fields.name}}
+      <span>{{a.fields.address}}</span>
+    </li>
+    <li *ngIf="pick_address_name">
+      <div class="save">
+          <button  md-icon-button (click)="saveNewAddress()">
+            <md-icon class="md-24">save</md-icon>
+          </button>
+        </div>
+      <input placeholder="Address name" [style.borderColor]="_context.todaysColor" [(ngModel)]="new_address_name">
+      <span>{{new_address_info?.address}}</span>
+    </li>
+    <li 
+      *ngIf="!pick_address_name"
+      (click)="address_picker_visible_toggle=true" 
+      [style.color]="_context.todaysColor">
+      <md-icon>add_location</md-icon> <div style="display:inline-block;vertical-align:super;">Add new address</div>
+    </li>
+  </ul>
+
+  
+  <h4>Past orders</h4>
+  <table>
+    <thead>
+      <td>Date</td>
+      <td>Price</td>
+    </thead>
+    <tr (click)="openOrder(x.pk)" *ngFor="let x of orderList">
+      <td>{{x.ordered_date_time | amLocal | amDateFormat:'LL' }}</td>
+      <td>$ {{ calculatePrice(x) | number : '1.2-2' }}</td>
+      <td style="text-align:right;">
+          <md-icon class="md-24" style="vertical-align: middle;">open_in_new</md-icon>
+      </td>
+    </tr>
+  </table>
+  
+
+</md-card>
+
+<address-picker *ngIf="address_picker_visible_toggle" [metadata]="{'validationZips':APP_CONFIG.AppValues.deliveryZips}" (addressChosenEmitter)="getAddressFromComponent($event)"></address-picker>

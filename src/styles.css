@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700');
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body{ font-family: 'Roboto Mono', monospace; margin: 0; padding: 0; }
+
+/* consistent anchor tag */
+a, a:hover, a:active, a:focus { outline: 0; cursor: pointer; }
+
+/* tramsitions */
+.animated-transitions{ transition: all 0.3s cubic-bezier(.25,.8,.25,1); }
+
+/* shadows */
+.elevation-1 { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+.elevation-2 { box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); }
+.elevation-3 { box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); }
+.elevation-4 { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+.elevation-5 { box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); }
+.text-elevation-1 { text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+.text-elevation-2 { text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); }
+.text-elevation-3 { text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); }
+.text-elevation-4 { text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+.text-elevation-5 { text-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22); }
+
+/* content */
+.breath{ padding: 1em;}
+
+md-card.main-card{ margin-top: 1em;margin-bottom: 75px;}
+
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2) { 
+    .hide-me-when-mobile{
+      display: none !important;
+    }
+}
+
+

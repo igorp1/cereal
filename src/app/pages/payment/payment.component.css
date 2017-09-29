@@ -1,0 +1,54 @@
+
+h4{ margin-bottom: .4em; }
+button{ margin: .2em; }
+
+td{ padding: .3em; }
+tr.total{ font-weight: bold; }
+table.summary, tr, td{ border: 1px solid #A0A0A0; }
+
+table.summary{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+input.location{
+    width: calc(100% - .5em - 6px);
+    height: 1.5em;
+    font-weight: 200;
+    padding: .25em;
+    border: 2px solid black;
+    background-color: #FFFFFF;
+    outline: none;
+}
+
+.address-list ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.address-list li{
+    margin: 0;
+    padding: 0;
+    height: 3em;
+    padding-left: .5em;
+    padding-top: .5em;
+    margin-bottom: .5em;
+    border-left: 3px solid #BBBBBB;
+    border-top-left-radius: .1em;
+    border-bottom-left-radius: .1em;
+}
+
+
+.address-list li:hover{
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); 
+}
+
+.address-list li:active{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.address-list li span{
+    font-size: .8em;
+    color:#8A8A8A;
+}

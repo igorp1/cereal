@@ -1,0 +1,87 @@
+h3{margin-bottom: 0;}
+h4{margin-top: 0;color: #747474; font-weight: normal;}
+
+button{
+    text-align: left;
+    padding-left: 0.75em;
+    margin-left: -0.75em 
+}
+
+ul, li{
+    padding: 0;
+    margin: 0;
+}
+
+ul{ list-style: none; margin-bottom: .5em;}
+
+li{
+    height: 2.5em;
+    margin-bottom: 1em;
+    border-left: 3px solid red;
+    padding-left: .5em;
+    border-radius: .2em;
+}
+p.no-items{
+    margin: 0;
+    color: #BEBCBE;
+    font-size: .8em;
+}
+
+li p{
+    margin: 0;
+    display: inline-block;    
+    margin-top: .75em;
+}
+
+div.amount{
+    float: right;
+    border-radius: .5em;
+    margin-top: .4em;
+}
+
+div.amount:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+div.amount p{
+    width: 2em;
+    height: 1.75em;
+    text-align: center;
+    padding: 0;
+    line-height: 1.75em;
+    margin: 0;
+    margin-right: -0.35em;
+    margin-left: -0.4em;
+    vertical-align: bottom;
+    border: 2px solid black;
+    display: inline-block;
+}
+
+button.minus, button.plus{
+    border: 2px solid black;
+    height: 2em;
+    margin:0;
+    padding: .1em;
+    padding-left: .5em;
+    padding-right: .5em;
+    background-color: #EEE;
+    outline: none;
+}
+
+button.minus:active{
+    background-color: #D80C4A;
+}
+
+button.plus:active{
+    background-color: #00C991;
+}
+
+button.minus{
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+}
+
+button.plus{
+    border-top-right-radius: .5em;
+    border-bottom-right-radius: .5em;
+}

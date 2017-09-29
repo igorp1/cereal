@@ -1,0 +1,15 @@
+<table class="elevation-1">
+        
+    <tr *ngFor="let x of cart">
+        <td>{{x.count}}x {{x.fields.name}}</td>
+        <td style="text-align:right;">$ {{x.fields.price * x.count | number : '1.2-2'}}</td>
+    </tr>
+    <tr *ngIf="deliveryCost">
+        <td>Delivery</td>
+        <td style="text-align:right;">$ {{ deliveryCost | number : '1.2-2' }}</td>
+    </tr>
+    <tr class="total">
+        <td><b>Total</b></td>
+        <td style="text-align:right;"><b>$ {{ getTotalValue() | number : '1.2-2'}}</b></td>
+    </tr>
+</table>

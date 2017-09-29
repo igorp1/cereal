@@ -1,0 +1,10 @@
+.main-list{
+    padding: 0;
+    margin: 0;
+}
+
+.main-list ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}

@@ -1,0 +1,15 @@
+<md-card class="main-card">  
+
+  <h3>Order Summary</h3>
+  <h4>
+    {{ orderModel?.ordered_date_time | amLocal | amDateFormat:'LL' }} <br>
+    {{ orderModel?.ordered_date_time | amLocal | amDateFormat: 'HH:mm A' }}
+  </h4>
+
+  <cart-summary [cart]="orderModel?.cart" [deliveryCost]="_cart.deliveryCost"></cart-summary>
+
+  <p>
+    Order status : <b [style.color]="_context.todaysColor">{{orderModel?.status}}</b>
+  </p>
+
+</md-card>

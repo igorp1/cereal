@@ -1,0 +1,49 @@
+
+
+<!-- NAV CONTAINER -->
+    <md-sidenav-container>
+
+      <!-- SIDE NAV -->
+      <md-sidenav #sidenav>
+        <div class="nav-wrapper">
+          <md-nav-list>
+            <ng-container *ngFor="let t of Tabs">
+              <!-- LIST ITEM  -->
+              <md-list-item *ngIf="shouldShowTab(t)" routerLinkActive="active-link" routerLink="{{t.link}}" [routerLinkActiveOptions]="{ exact: true }">
+                <i class="material-icons" style="margin-right:10px;">{{t.icon}}</i>
+                <a md-line class="nav-link">{{ t.label }}</a>
+              </md-list-item>
+              <!-- eof LIST ITEM -->
+            </ng-container>
+          </md-nav-list>
+        </div>
+      </md-sidenav>
+      <!-- eof SIDE NAV -->
+
+    <!-- MAIN CONTENT -->
+
+  <div class="pure-g">
+      <div class="pure-u-1-24"></div>
+      <div class="pure-u-22-24"> 
+            <router-outlet></router-outlet>
+      </div>
+      <div class="pure-u-1-24"></div>
+  </div>
+    <!-- <md-grid-list cols="16" rowHeight="100%">
+      <md-grid-tile [colspan]="1" class="hide-me-when-mobile"></md-grid-tile>
+      <md-grid-tile [colspan]="14" class="main-outlet">
+        <div class="content-container">
+        </div>
+      </md-grid-tile>
+      <md-grid-tile [colspan]="1" class="hide-me-when-mobile"></md-grid-tile>
+    </md-grid-list> -->
+    <!-- eof MAIN CONTENT -->
+
+  </md-sidenav-container>
+  <!-- NAV CONTAINER -->
+
+<!-- nav button -->
+<button type="button" md-icon-button md-raised-button (click)="sidenav.open()" class="open-nav-button">
+  <i class="material-icons">menu</i>
+</button>
+<!-- eof: nav button -->

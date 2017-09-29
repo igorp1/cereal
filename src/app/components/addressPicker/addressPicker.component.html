@@ -1,0 +1,33 @@
+<div class="map-container" *ngIf="visible">
+  <h2>Pick address</h2>
+  
+
+  <div class="form-group">
+    <input 
+      mdInput placeholder="search for location" 
+      autocorrect="off" 
+      autocapitalize="off" 
+      spellcheck="off" 
+      type="text"
+      #search
+      [formControl]="searchControl"
+      class="elevation-1">
+  </div>
+
+  <div class="map elevation-1">
+    <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" >
+      <agm-marker [latitude]="latitude" [longitude]="longitude" *ngIf="userInteracted"></agm-marker>
+    </agm-map>
+  </div>
+
+  <p class="error">{{validationMessage}}</p>
+
+  <div class="control-buttons">
+    <button md-raised-button disabled *ngIf="!userInteracted"><md-icon>add_location</md-icon> Pick address</button>
+    <button md-raised-button (click)="confirmAddress()" *ngIf="userInteracted"><md-icon>add_location</md-icon> Pick address</button>
+  
+    <br><br>
+    <button md-raised-button (click)="close()"><md-icon>clear</md-icon> Cancel</button>
+  </div>
+
+</div>

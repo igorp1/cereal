@@ -1,0 +1,83 @@
+<md-card class="main-card">
+    <!-- TABS -->
+    <div class="tab-container">
+        <ng-container  *ngFor="let p of nav.pages">
+          <div class="tab-item animated-transitions"
+            [style.color]="nav.currentPage == p ? _context.todaysColor : ''" 
+            [style.borderColor]="nav.currentPage == p ? _context.todaysColor : ''"
+            (click)="nav.currentPage = p">
+              {{ p }}
+          </div> 
+        </ng-container>
+    </div>
+
+    <div class="content">
+
+      <!-- inventory view --> 
+      <div *ngIf="nav.currentPage == 'inventory' ">
+        
+        <div>
+          <ul>
+              <li class="elevation-1" [style.borderLeftColor]="color" *ngFor="let x of inventory">
+                  <div class="pure-g">
+                      <div class="pure-u-1-5 pure-u-lg-3-12">
+                        <img class="list-item-img" [src]="x.fields.image_link">
+                      </div>
+                      <div class="pure-u-3-5 pure-u-lg-6-12"> 
+                        <h3 class="list-item-title">{{x.fields.name}}</h3> 
+                        <p class="unit-count">{{ x.fields.servings_stocked != undefined ? x.fields.servings_stocked : x.fields.units_stocked }} in stock </p>
+                      </div>
+                      <div class="pure-u-1-5 pure-u-lg-3-12">
+                        <button md-icon-button class="list-item-button" [mdMenuTriggerFor]="menu">
+                          <md-icon>more_vert</md-icon>
+                        </button>
+                      </div>
+                  </div> 
+                  <md-menu #menu="mdMenu">
+                      <button md-menu-item (click)="openLink(x.fields.buy_link)">buy more</button>
+                      <button md-menu-item (click)="openRestockModal(x)">restock</button>
+                      <button md-menu-item disabled>edit</button>
+                      <button md-menu-item disabled>remove</button>
+                    </md-menu>
+                </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- orders view -->
+      <div *ngIf="nav.currentPage == 'orders' ">
+        
+        <div class="section-header">
+          <button md-raised-button [style.border]=" 'solid 3px ' + _context.todaysColor "><md-icon>directions_car</md-icon> Delivery Dashboard</button>
+        </div>  
+        <hr>
+        <div style="overflow-x:scroll">
+          <a-table [data]="orderList" [metadata]="orderList_metadata"></a-table>
+        </div>
+      </div>
+
+      <!-- dev view -->
+      <div *ngIf="nav.currentPage == 'dev' ">
+        <div style="text-align:center; color:#c5c5c5" *ngIf="true">
+            <br> ¯\_(ツ)_/¯  <br>
+            Nothing to see here
+        </div>
+      </div>
+      
+    </div>
+ 
+</md-card>
+
+<div class="modal-backdrop" *ngIf="restocking" [style.top]="modal_top + 'px'">
+  <div class="modal-window" [style.top]="modal_top + 'px'">
+    <h3 class="title">How many units are you adding to the stock?</h3>      
+    <input class="restock" type="number" placeholder="#" [(ngModel)]="restockAmount">
+    <br>
+    <p style="color:tomato">{{restockError}}</p>
+    <br>
+    <button md-raised-button (click)="confirmRestockItem()">OK {{ restockAmount ? "(" + restockAmount + ")" : "" }}</button>
+    <button md-raised-button (click)="closeRestockModal()">Cancel</button>
+    <br>
+  </div>
+</div>

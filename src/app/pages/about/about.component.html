@@ -1,0 +1,18 @@
+<md-card class="main-card">  
+
+  <h3>About</h3>
+
+  <ng-container *ngFor="let section of aboutText">
+    <h4 class="section-title">{{section.title}}</h4>
+    <p>{{section.text}}</p>            
+  </ng-container>
+
+  <button md-raised-button [style.borderColor]="_context.todaysColor" (click)="auth.login()" *ngIf="!auth.isAuthenticated()">
+    Login/Signup
+  </button> 
+
+  <button md-raised-button [style.borderColor]="_context.todaysColor" (click)="buildABowl()">
+    Build your bowl
+  </button> 
+
+</md-card>

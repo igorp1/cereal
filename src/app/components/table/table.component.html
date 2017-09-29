@@ -1,0 +1,20 @@
+<table>
+    <thead *ngIf="!metadata.hideHeader">
+        <td *ngFor="let col of metadata.columns">{{ col.title }}</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data;" (click)="rowClicked(row)">
+            <td *ngFor="let col of metadata.columns">
+                <ng-container *ngIf="col.dataType == 'dateTime'">
+                    {{ index(row,col.name) | amLocal | amDateFormat:'DD/MM/YYYY HH:mm A' }}
+                </ng-container>
+                <ng-container *ngIf="col.dataType == 'money'">
+                    $ {{ index(row,col.name) | number : '1.2-2' }}
+                </ng-container>
+                <ng-container *ngIf="col.dataType == 'text'">
+                    {{ index(row,col.name) }}    
+                </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table>
